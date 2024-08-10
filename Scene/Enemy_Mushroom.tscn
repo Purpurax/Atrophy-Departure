@@ -241,7 +241,7 @@ _data = {
 [node name="EnemyMushroom" type="CharacterBody2D" node_paths=PackedStringArray("AnimPlayer", "Sprite")]
 scale = Vector2(2, 2)
 collision_layer = 2
-collision_mask = 7
+collision_mask = 5
 script = ExtResource("1_vfx6n")
 AnimPlayer = NodePath("AnimationPlayer")
 Sprite = NodePath("Sprite2D")

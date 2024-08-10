@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-const SPEED = 300.0
+const SPEED = 30.0
 const JUMP_VELOCITY = -800.0
 const FAST_FALL_FACTOR = 4
 
@@ -31,7 +31,7 @@ func _ready() -> void:
 func update_properties():
 	match entity_type:
 		EntityType.MUSHROOM: 
-			stationary = true
+			stationary = false
 			trigger_distance = 500
 			attack_speed = 5.0
 			base_damage = 10.0
@@ -42,6 +42,7 @@ func _physics_process(delta: float):
 
 func _process(delta: float):
 	time_elapsed += delta
+	
 	var player_position: Vector2 = World.get_player_position()
 	var horizontal_difference: int = player_position.x - self.get_transform().get_origin().x
 	
@@ -52,10 +53,11 @@ func _process(delta: float):
 			time_elapsed = 0.0
 			Attack()
 
+
 func Movement(player_position: Vector2, horizontal_difference: int) -> void:
 	if !stationary:
 		if state != State.ATTACK and state != State.HIT:
-			velocity.x = move_toward(self.get_transform().get_origin().x, player_position.x, float(SPEED))
+			velocity.x = move_toward(self.get_transform().get_origin().x, player_position.x, 1.0)
 			update_state(State.MOVE)
 			flip_player(horizontal_difference)
 		else:

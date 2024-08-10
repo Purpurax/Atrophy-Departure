@@ -5,7 +5,7 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -800.0
 const FAST_FALL_FACTOR = 4
 
-enum State {IDLE, MOVE, ATTACK, PARRY}
+enum State {IDLE, MOVE, ATTACK, PARRY, HIT}
 enum Decay {NONE, PARTIAL, RUST}
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -88,6 +88,9 @@ func update_state(new_state: State, new_decay: Decay) -> void:
 		State.PARRY:
 			AnimPlayer.stop()
 			AnimPlayer.play(animation_prefix + "Parry")
+		State.HIT:
+			AnimPlayer.stop()
+			AnimPlayer.play(animation_prefix + "Hurt")
 
 func update_decay(decay_percent: float):
 	var new_decay: Decay
@@ -106,9 +109,9 @@ func flip_player(direction: int) -> void:
 		Sprite.flip_h = flipped
 
 
-func take_damage(amount: float, decay: float):
+func take_damage(amount: float, decay_percentage: float):
 	print("Player says UFF")
-	#update_state(State.HIT)
+	update_state(State.HIT, decay)
 
 func _anim_end() -> void:
 	state = State.MOVE

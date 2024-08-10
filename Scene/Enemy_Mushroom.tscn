@@ -216,6 +216,7 @@ tracks/3/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 [sub_resource type="Animation" id="Animation_3mwt5"]
 resource_name = "Attack"
@@ -285,6 +286,8 @@ tracks/4/keys = {
 
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> afcafc3e9c42396a0a0a9221c44e95e030cdef86
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7fst8"]
 _data = {
 "Attack": SubResource("Animation_3mwt5"),
@@ -295,7 +298,8 @@ _data = {
 
 [node name="EnemyMushroom" type="CharacterBody2D" node_paths=PackedStringArray("AnimPlayer", "Sprite")]
 scale = Vector2(2, 2)
-collision_layer = 6
+collision_layer = 2
+collision_mask = 7
 script = ExtResource("1_vfx6n")
 AnimPlayer = NodePath("AnimationPlayer")
 Sprite = NodePath("Sprite2D")

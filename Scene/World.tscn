@@ -1,3 +1,4 @@
+<<<<<<< HEAD:Scene/World2.tscn
 [gd_scene load_steps=8 format=3 uid="uid://dw42turh2yxte"]
 
 <<<<<<< Updated upstream:Scene/World2.tscn
@@ -22,14 +23,24 @@
 [ext_resource type="PackedScene" uid="uid://dsesq20h0pl82" path="res://Scene/Player.tscn" id="1_k76df"]
 [ext_resource type="Script" path="res://Scene/World.gd" id="1_o026n"]
 [ext_resource type="PackedScene" uid="uid://b6rk8gu3q5vyb" path="res://Scene/Background.tscn" id="1_qgcqq"]
+=======
+[gd_scene load_steps=8 format=3 uid="uid://cl85wcojoski3"]
+
+[ext_resource type="PackedScene" uid="uid://dsesq20h0pl82" path="res://Scene/Player.tscn" id="1_k76df"]
+[ext_resource type="Script" path="res://Scene/World.gd" id="1_o026n"]
+[ext_resource type="PackedScene" uid="uid://b6rk8gu3q5vyb" path="res://Scene/Background.tscn" id="1_qgcqq"]
+>>>>>>> afcafc3e9c42396a0a0a9221c44e95e030cdef86:Scene/World.tscn
 [ext_resource type="PackedScene" uid="uid://bc1v51x3ss4aq" path="res://Scene/tile_map.tscn" id="4_6f6ma"]
 [ext_resource type="PackedScene" path="res://Scene/Coin.tscn" id="4_nuaeg"]
 [ext_resource type="PackedScene" uid="uid://cmrs5ncm1c83d" path="res://Scene/Enemy_Mushroom.tscn" id="6_2rsi8"]
 [ext_resource type="PackedScene" path="res://Scene/UI.tscn" id="6_37pc7"]
+<<<<<<< HEAD:Scene/World2.tscn
 >>>>>>> Stashed changes:Scene/World.tscn
+=======
+>>>>>>> afcafc3e9c42396a0a0a9221c44e95e030cdef86:Scene/World.tscn
 
 [node name="World" type="Node2D" node_paths=PackedStringArray("UI", "Player", "Camera")]
-script = ExtResource("1_5eiif")
+script = ExtResource("1_o026n")
 UI = NodePath("UI")
 Player = NodePath("Player")
 Camera = NodePath("Camera")
@@ -39,34 +50,34 @@ position = Vector2(-4, 94)
 
 [node name="Environment" type="Node2D" parent="."]
 
-[node name="Background" parent="Environment" instance=ExtResource("1_041l0")]
+[node name="Background" parent="Environment" instance=ExtResource("1_qgcqq")]
 texture_filter = 1
 scale = Vector2(100, 3)
 
-[node name="TileMap" parent="Environment" instance=ExtResource("3_frf37")]
+[node name="TileMap" parent="Environment" instance=ExtResource("4_6f6ma")]
 layer_0/tile_data = PackedInt32Array(65539, 131072, 0, 65538, 131072, 0, 65537, 131072, 0, 65536, 131072, 0, 131071, 131072, 0, 131070, 131072, 0, 131069, 131072, 0, 131068, 131072, 0, 131067, 131072, 0, 196603, 131072, 1, 196604, 131072, 1, 196605, 131072, 1, 196606, 131072, 1, 196607, 131072, 1, 131072, 131072, 1, 131073, 131072, 1, 131074, 131072, 1, 131075, 131072, 1, 196609, 131072, 1, 196608, 131072, 1, 262143, 131072, 1, 262139, 131072, 1, 262140, 131072, 1, 262141, 131072, 1, 262142, 131072, 1, 196610, 131072, 1, 196611, 131072, 1, 327675, 131072, 1, 327676, 131072, 1, 327677, 131072, 1, 327678, 131072, 1, 327679, 131072, 1, 262144, 131072, 1, 262145, 131072, 1, 262146, 131072, 1, 262147, 131072, 1, 131066, 131072, 0, 196602, 131072, 1, 262138, 131072, 1, 327674, 131072, 1, 327673, 131072, 1, 262137, 131072, 1, 196601, 131072, 1, 131065, 131072, 0, -262152, 196608, 1, -196616, 196608, 1, -131080, 196608, 1, -65544, 196608, 1, -8, 196608, 1, 65528, 196608, 1, 131064, 131072, 1, 131063, 131072, 1, 196599, 131072, 1, 262135, 131072, 1, 327671, 131072, 1, 327672, 131072, 1, 262136, 131072, 1, 196600, 131072, 1, 262134, 131072, 1, 196598, 131072, 1, 65527, 131072, 1, -9, 131072, 1, -65545, 131072, 1, -131081, 131072, 1, -196617, 131072, 1, -262153, 131072, 1, -262154, 131072, 1, -196618, 131072, 1, -131082, 131072, 1, -65546, 131072, 1, -10, 131072, 1, 65526, 131072, 1, 131062, 131072, 1, 327670, 131072, 1, 327669, 131072, 1, 262133, 131072, 1, 196597, 131072, 1, 131061, 131072, 1, 65525, 131072, 1, -11, 131072, 1, -65547, 131072, 1, -131083, 131072, 1, -196619, 131072, 1, -262155, 131072, 1, -262156, 65536, 1, -196620, 65536, 1, -131084, 65536, 1, -65548, 65536, 1, -12, 65536, 1, 65524, 65536, 1, 131060, 65536, 1, 196596, 65536, 1, 262132, 65536, 1, 327668, 65536, 1, 393204, 65536, 1, 393205, 131072, 1, 393206, 131072, 1, 393207, 131072, 1, 393208, 131072, 1, 393209, 131072, 1, 393210, 131072, 1, 393211, 131072, 1, 393212, 131072, 1, 393213, 131072, 1, 393214, 131072, 1, 327681, 131072, 1, 327682, 131072, 1, 327683, 131072, 1, 327680, 131072, 1, 393215, 131072, 1, 458749, 131072, 1, 458748, 131072, 1, 458747, 131072, 1, 458746, 131072, 1, 458745, 131072, 1, 458744, 131072, 1, 458743, 131072, 1, 458742, 131072, 1, 458741, 131072, 1, 458740, 65536, 1, 524277, 131072, 2, 524278, 131072, 2, 524276, 65536, 2, 524279, 131072, 2, 524280, 131072, 2, 524281, 131072, 2, 524282, 131072, 2, 524283, 131072, 2, 524284, 131072, 2, 524285, 131072, 2, 524286, 131072, 2, 524287, 131072, 2, 458752, 131072, 2, 458753, 131072, 2, 458754, 131072, 2, 458755, 196608, 2, 393219, 131072, 1, 393218, 131072, 1, 393217, 131072, 1, 393216, 131072, 1, 458751, 131072, 1, 458750, 131072, 1, -327688, 196608, 1, -327689, 131072, 1, -327690, 131072, 1, -327691, 131072, 1, -327692, 65536, 1, -393228, 65536, 1, -393227, 131072, 1, -393226, 131072, 1, -393225, 131072, 1, -393224, 196608, 1, -458760, 196608, 0, -458761, 131072, 0, -458762, 131072, 0, -458763, 131072, 0, -458764, 65536, 0, 65540, 131072, 0, 65541, 131072, 0, 65542, 131072, 0, 65543, 131072, 0, 65544, 131072, 0, 65545, 131072, 0, 65546, 131072, 0, 65547, 131072, 0, 65548, 131072, 0, 65549, 196608, 0, 131085, 196608, 1, 131084, 131072, 1, 131083, 131072, 1, 131082, 131072, 1, 131081, 131072, 1, 131080, 131072, 1, 131079, 131072, 1, 131078, 131072, 1, 131077, 131072, 1, 131076, 131072, 1, 196612, 131072, 1, 196613, 131072, 1, 196620, 131072, 2, 196619, 131072, 2, 196618, 131072, 2, 196617, 131072, 2, 196616, 131072, 1, 196615, 131072, 1, 196614, 131072, 1, 196621, 196608, 2, 262148, 131072, 1, 327684, 131072, 1, 262149, 131072, 1, 393220, 196608, 2, 262150, 131072, 2, 262151, 131072, 2, 262152, 196608, 2, 327685, 196608, 2, 65552, 65536, 0, 65553, 131072, 0, 65554, 131072, 0, 65555, 131072, 0, 65556, 131072, 0, 65557, 131072, 0, 65558, 131072, 0, 65559, 131072, 0, 131094, 131072, 1, 131093, 131072, 1, 131092, 131072, 1, 131091, 131072, 1, 131090, 131072, 1, 131089, 131072, 1, 131088, 65536, 1, 196624, 65536, 2, 196625, 131072, 2, 196626, 131072, 2, 196627, 131072, 2, 131095, 131072, 1, 65560, 131072, 0, 65561, 131072, 0, 65562, 196608, 0, 131098, 196608, 1, 131097, 131072, 1, 196632, 131072, 2, 196631, 131072, 2, 196630, 131072, 2, 196629, 131072, 2, 196628, 131072, 2, 131096, 131072, 1, 196633, 131072, 2, 196634, 196608, 2, 65564, 65536, 0, 131100, 65536, 1, 196636, 65536, 2, 196637, 131072, 2, 131101, 131072, 1, 65565, 131072, 0, -65506, 65536, 0, 30, 65536, 1, 65566, 131072, 1, 131102, 131072, 1, 196638, 131072, 1, 262174, 65536, 2, 262175, 196608, 2, 196639, 196608, 1, 131103, 196608, 1, 65567, 196608, 1, 31, 196608, 1, -65505, 196608, 0)
 
-[node name="Coin" parent="Environment" instance=ExtResource("4_d0qf8")]
+[node name="Coin" parent="Environment" instance=ExtResource("4_nuaeg")]
 position = Vector2(-260, -70)
 
-[node name="Coin2" parent="Environment" instance=ExtResource("4_d0qf8")]
+[node name="Coin2" parent="Environment" instance=ExtResource("4_nuaeg")]
 position = Vector2(-229, -41)
 
-[node name="Coin3" parent="Environment" instance=ExtResource("4_d0qf8")]
+[node name="Coin3" parent="Environment" instance=ExtResource("4_nuaeg")]
 position = Vector2(175, -39)
 
-[node name="Coin4" parent="Environment" instance=ExtResource("4_d0qf8")]
+[node name="Coin4" parent="Environment" instance=ExtResource("4_nuaeg")]
 position = Vector2(1, -241)
 
-[node name="Coin5" parent="Environment" instance=ExtResource("4_d0qf8")]
+[node name="Coin5" parent="Environment" instance=ExtResource("4_nuaeg")]
 position = Vector2(211, -85)
 
 [node name="Entities" type="Node2D" parent="."]
 
-[node name="EnemyMushroom" parent="Entities" node_paths=PackedStringArray("World") instance=ExtResource("5_0nuwj")]
+[node name="EnemyMushroom" parent="Entities" node_paths=PackedStringArray("World") instance=ExtResource("6_2rsi8")]
 position = Vector2(806, 30)
 World = NodePath("../..")
 
-[node name="Player" parent="." instance=ExtResource("2_05dpy")]
+[node name="Player" parent="." instance=ExtResource("1_k76df")]
 
-[node name="UI" parent="." instance=ExtResource("7_elhy6")]
+[node name="UI" parent="." instance=ExtResource("6_37pc7")]

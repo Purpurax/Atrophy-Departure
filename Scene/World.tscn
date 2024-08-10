@@ -7,23 +7,25 @@
 [ext_resource type="PackedScene" path="res://Scene/Coin.tscn" id="4_nuaeg"]
 [ext_resource type="PackedScene" path="res://Scene/UI.tscn" id="6_37pc7"]
 
-[node name="World" type="Node2D" node_paths=PackedStringArray("coins_label")]
+[node name="World" type="Node2D" node_paths=PackedStringArray("UI", "Player", "Camera")]
 script = ExtResource("1_o026n")
-coins_label = NodePath("UI")
+UI = NodePath("UI")
+Player = NodePath("Player")
+Camera = NodePath("Camera")
 
-[node name="Camera" type="Camera2D" parent="."]
-
-[node name="Background" parent="Camera" instance=ExtResource("1_qgcqq")]
+[node name="Background" parent="." instance=ExtResource("1_qgcqq")]
 texture_filter = 1
 scale = Vector2(3, 3)
 
-[node name="Player" parent="Camera" instance=ExtResource("1_k76df")]
-position = Vector2(4, -94)
+[node name="Player" parent="." instance=ExtResource("1_k76df")]
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(-4, 94)
 
 [node name="Environment" type="Node2D" parent="."]
 
 [node name="TileMap" parent="Environment" instance=ExtResource("4_6f6ma")]
-layer_0/tile_data = PackedInt32Array(65531, 65536, 0, 65532, 131072, 0, 65533, 131072, 0, 65534, 131072, 0, 65535, 131072, 0, 0, 131072, 0, 1, 131072, 0, 2, 131072, 0, 3, 196608, 0, 65539, 196608, 1, 65538, 131072, 1, 65537, 131072, 1, 65536, 131072, 1, 131071, 131072, 1, 131070, 131072, 1, 131069, 131072, 1, 131068, 131072, 1, 131067, 65536, 1, 196603, 65536, 1, 196604, 131072, 1, 196605, 131072, 1, 196606, 131072, 1, 196607, 131072, 1, 131072, 131072, 1, 131073, 131072, 1, 131074, 131072, 1, 131075, 196608, 1, 196609, 131072, 2, 196608, 131072, 2, 262143, 131072, 2, 262139, 65536, 2, 262140, 131072, 2, 262141, 131072, 2, 262142, 131072, 2, 196610, 131072, 2, 196611, 196608, 2)
+layer_0/tile_data = PackedInt32Array(65539, 196608, 0, 65538, 131072, 0, 65537, 131072, 0, 65536, 131072, 0, 131071, 131072, 0, 131070, 131072, 0, 131069, 131072, 0, 131068, 131072, 0, 131067, 65536, 0, 196603, 65536, 1, 196604, 131072, 1, 196605, 131072, 1, 196606, 131072, 1, 196607, 131072, 1, 131072, 131072, 1, 131073, 131072, 1, 131074, 131072, 1, 131075, 196608, 1, 196609, 131072, 1, 196608, 131072, 1, 262143, 131072, 1, 262139, 65536, 1, 262140, 131072, 1, 262141, 131072, 1, 262142, 131072, 1, 196610, 131072, 1, 196611, 196608, 1, 327675, 65536, 2, 327676, 131072, 2, 327677, 131072, 2, 327678, 131072, 2, 327679, 131072, 2, 262144, 131072, 2, 262145, 131072, 2, 262146, 131072, 2, 262147, 196608, 2)
 
 [node name="Coin" parent="Environment" instance=ExtResource("4_nuaeg")]
 position = Vector2(-260, -70)

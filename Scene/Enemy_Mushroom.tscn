@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://cmrs5ncm1c83d"]
+[gd_scene load_steps=11 format=3 uid="uid://cmrs5ncm1c83d"]
 
+[ext_resource type="Script" path="res://Script/Enemy.gd" id="1_vfx6n"]
 [ext_resource type="Texture2D" uid="uid://co4j4catfwqs3" path="res://Sprite/Enemies/Forest_Monsters_FREE/Mushroom/Mushroom with VFX/Mushroom-Idle.png" id="1_wd85i"]
 [ext_resource type="Texture2D" uid="uid://bd7s5upkvbs7s" path="res://Sprite/Enemies/Forest_Monsters_FREE/Mushroom/Mushroom with VFX/Mushroom-Run.png" id="2_xis7s"]
 [ext_resource type="Texture2D" uid="uid://of052sioyhq" path="res://Sprite/Enemies/Forest_Monsters_FREE/Mushroom/Mushroom with VFX/Mushroom-Attack.png" id="3_ryo3h"]
@@ -166,6 +167,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_3mwt5"]
 resource_name = "Attack"
+length = 1.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -209,10 +211,24 @@ tracks/3/path = NodePath("Sprite2D:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.5, 0.9, 1, 1.1, 1.2, 1.3, 1.4),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_anim_attack_end"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7fst8"]
@@ -223,10 +239,12 @@ _data = {
 "Run": SubResource("Animation_vo5hl")
 }
 
-[node name="EnemyMushroom" type="CharacterBody2D"]
+[node name="EnemyMushroom" type="CharacterBody2D" node_paths=PackedStringArray("AnimPlayer", "Sprite")]
 scale = Vector2(2, 2)
-collision_layer = 7
-collision_mask = 0
+collision_layer = 6
+script = ExtResource("1_vfx6n")
+AnimPlayer = NodePath("AnimationPlayer")
+Sprite = NodePath("Sprite2D")
 
 [node name="WorldCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_3u70x")

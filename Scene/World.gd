@@ -36,3 +36,6 @@ func move_camera() -> void:
 		smoothed_horizontal_movement = RIGHT_X_CAP
 	
 	Camera.transform.origin = Vector2(smoothed_horizontal_movement, 0)
+
+func get_player_position() -> Vector2:
+	return Player.get_transform().get_origin()

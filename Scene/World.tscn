@@ -1,6 +1,36 @@
-[gd_scene load_steps=2 format=3 uid="uid://c2s567cku0fmk"]
+[gd_scene load_steps=7 format=3 uid="uid://c2s567cku0fmk"]
 
+[ext_resource type="Texture2D" uid="uid://c2mfpbkgt1ts" path="res://Sprite/Main_Character/FREE-Knight 2D Pixel Art/Sprite_with_outline/IDLE.png" id="1_8kbmk"]
 [ext_resource type="PackedScene" uid="uid://b6rk8gu3q5vyb" path="res://Scene/Background.tscn" id="1_qgcqq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cc0op"]
+atlas = ExtResource("1_8kbmk")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_akrkv"]
+atlas = ExtResource("1_8kbmk")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7n3a8"]
+atlas = ExtResource("1_8kbmk")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wv45e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cc0op")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_akrkv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7n3a8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="World" type="Node2D"]
 
@@ -8,9 +38,17 @@
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
 
+[node name="Sprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+texture_filter = 1
+position = Vector2(152, 115)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_wv45e")
+autoplay = "default"
+frame_progress = 0.359427
+
 [node name="Sprite2D" parent="." instance=ExtResource("1_qgcqq")]
 texture_filter = 1
-position = Vector2(323, 181)
+position = Vector2(550, 137)
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3

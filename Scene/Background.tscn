@@ -7,4 +7,6 @@ texture_repeat = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
+position = Vector2(-50.5, 0)
+scale = Vector2(0.842188, 1)
 texture = ExtResource("1_3x28s")

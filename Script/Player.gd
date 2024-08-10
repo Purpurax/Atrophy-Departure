@@ -6,7 +6,7 @@ const JUMP_VELOCITY = -600.0
 const FAST_FALL_FACTOR = 4
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-enum State {IDLE, MOVE, ATTACK}
+enum State {IDLE, MOVE, ATTACK, PARRY}
 var state: State = State.IDLE
 var flipped: bool = false
 
@@ -29,19 +29,21 @@ func _process(delta):
 	Movement()
 	if is_on_floor() and Input.is_action_just_pressed("Attack"):
 		Attack()
+	if is_on_floor() and Input.is_action_just_pressed("Parry"):
+		Parry()
 
 func Movement() -> void:
-	if Input.is_action_just_pressed("Jump") and is_on_floor() and state != State.ATTACK:
+	if Input.is_action_just_pressed("Jump") and is_on_floor() and state != State.ATTACK and state != State.PARRY:
 		velocity.y = JUMP_VELOCITY
 	
 	var direction: int = Input.get_axis("Left", "Right")
-	if direction and state != State.ATTACK:
+	if direction and state != State.ATTACK and state != State.PARRY:
 		velocity.x = direction * SPEED
 		update_state(State.MOVE)
 		flip_player(direction)
 	else:
 		update_state(State.IDLE)
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, SPEED/7)
 	
 	move_and_slide()
 
@@ -49,10 +51,13 @@ func Attack() -> void:
 	# calculate damage depending on Decay
 	update_state(State.ATTACK)
 
+func Parry() -> void:
+	update_state(State.PARRY)
+
 func update_state(new_state: State) -> void:
 	if state == new_state:
 		return
-	if state == State.ATTACK: # attacks cannot be canceled
+	if state == State.ATTACK or state == State.PARRY: # attacks cannot be canceled
 		return
 	state = new_state
 	match new_state:
@@ -65,6 +70,9 @@ func update_state(new_state: State) -> void:
 		State.ATTACK:
 			AnimPlayer.stop()
 			AnimPlayer.play("Attack")
+		State.PARRY:
+			AnimPlayer.stop()
+			AnimPlayer.play("Parry")
 
 func flip_player(direction: int) -> void:
 	if !flipped && direction == -1 \
@@ -73,5 +81,9 @@ func flip_player(direction: int) -> void:
 		Sprite.flip_h = flipped
 
 func _anim_attack_end() -> void:
+	state = State.MOVE
+	update_state(State.IDLE)
+
+func _anim_parry_end() -> void:
 	state = State.MOVE
 	update_state(State.IDLE)

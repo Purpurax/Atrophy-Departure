@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://c2s567cku0fmk"]
 
-[ext_resource type="Texture2D" uid="uid://c2mfpbkgt1ts" path="res://Sprite/Main_Character/FREE-Knight 2D Pixel Art/Sprite_with_outline/IDLE.png" id="1_8kbmk"]
+[ext_resource type="PackedScene" uid="uid://b37wf6427jx8p" path="res://Scene/Player.tscn" id="1_k76df"]
 [ext_resource type="PackedScene" uid="uid://b6rk8gu3q5vyb" path="res://Scene/Background.tscn" id="1_qgcqq"]
 [ext_resource type="Texture2D" uid="uid://8l7h2f2hltj" path="res://Sprite/UI/LifeBarMiniUnder.png" id="3_8xf28"]
 [ext_resource type="Texture2D" uid="uid://ds7ad3nf2jvgg" path="res://Sprite/UI/LifeBarMiniProgress.png" id="4_ww2hx"]
@@ -37,21 +37,17 @@ animations = [{
 
 [node name="World" type="Node2D"]
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="Camera" type="Camera2D" parent="."]
 
-[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
-
-[node name="Sprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+[node name="Background" parent="Camera" instance=ExtResource("1_qgcqq")]
 texture_filter = 1
-position = Vector2(152, 115)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_wv45e")
 autoplay = "default"
 frame_progress = 0.594876
 
-[node name="Sprite2D" parent="." instance=ExtResource("1_qgcqq")]
-texture_filter = 1
-position = Vector2(550, 137)
+[node name="Player" parent="Camera" instance=ExtResource("1_k76df")]
+position = Vector2(4, -94)
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3

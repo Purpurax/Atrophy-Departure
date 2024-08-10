@@ -9,6 +9,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 enum State {IDLE, MOVE, ATTACK, PARRY}
 var state: State = State.IDLE
 var flipped: bool = false
+var rust = false
 
 
 @export var AnimPlayer: AnimationPlayer
@@ -31,7 +32,9 @@ func _process(delta):
 		Attack()
 	if is_on_floor() and Input.is_action_just_pressed("Parry"):
 		Parry()
-
+	if Input.is_action_just_pressed("Rust"):
+		rust = true
+		
 func Movement() -> void:
 	if Input.is_action_just_pressed("Jump") and is_on_floor() and state != State.ATTACK and state != State.PARRY:
 		velocity.y = JUMP_VELOCITY
@@ -62,18 +65,33 @@ func update_state(new_state: State) -> void:
 	state = new_state
 	match new_state:
 		State.IDLE:
-			AnimPlayer.stop()
-			AnimPlayer.play("Idle")
+			if rust == false:
+				AnimPlayer.stop()
+				AnimPlayer.play("Idle")
+			else:
+				AnimPlayer.stop()
+				AnimPlayer.play("Rust Idle")
 		State.MOVE:
-			AnimPlayer.stop()
-			AnimPlayer.play("Walk")
+			if rust == false:
+				AnimPlayer.stop()
+				AnimPlayer.play("Walk")
+			else:
+				AnimPlayer.stop()
+				AnimPlayer.play("Rust Walking")
 		State.ATTACK:
-			AnimPlayer.stop()
-			AnimPlayer.play("Attack")
+			if rust == false:
+				AnimPlayer.stop()
+				AnimPlayer.play("Attack")
+			else: 
+				AnimPlayer.stop()
+				AnimPlayer.play("Rust Attack")
 		State.PARRY:
-			AnimPlayer.stop()
-			AnimPlayer.play("Parry")
-
+			if rust == false:
+				AnimPlayer.stop()
+				AnimPlayer.play("Parry")
+			else:
+				AnimPlayer.stop()
+				AnimPlayer.play("Rust Parry")
 func flip_player(direction: int) -> void:
 	if !flipped && direction == -1 \
 			or flipped && direction == 1:

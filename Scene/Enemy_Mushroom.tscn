@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cmrs5ncm1c83d"]
+[gd_scene load_steps=12 format=3 uid="uid://5ipkdxwfugik"]
 
 [ext_resource type="Script" path="res://Script/Enemy.gd" id="1_vfx6n"]
 [ext_resource type="Texture2D" uid="uid://co4j4catfwqs3" path="res://Sprite/Enemies/Forest_Monsters_FREE/Mushroom/Mushroom with VFX/Mushroom-Idle.png" id="1_wd85i"]
@@ -10,6 +10,7 @@ radius = 7.0
 
 [sub_resource type="Animation" id="Animation_3mwt5"]
 resource_name = "Attack"
+length = 1.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -65,7 +66,7 @@ tracks/4/path = NodePath(".")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(1),
+"times": PackedFloat32Array(1.4),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -238,6 +239,9 @@ _data = {
 "Run": SubResource("Animation_vo5hl")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_flw2l"]
+size = Vector2(18.5, 32.5)
+
 [node name="EnemyMushroom" type="CharacterBody2D" node_paths=PackedStringArray("AnimPlayer", "Sprite")]
 scale = Vector2(2, 2)
 collision_layer = 2
@@ -259,3 +263,14 @@ libraries = {
 "": SubResource("AnimationLibrary_7fst8")
 }
 autoplay = "Idle"
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-0.25, -0.25)
+shape = SubResource("RectangleShape2D_flw2l")
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]

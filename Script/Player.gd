@@ -92,11 +92,17 @@ func update_state(new_state: State) -> void:
 			else:
 				AnimPlayer.stop()
 				AnimPlayer.play("Rust Parry")
+
 func flip_player(direction: int) -> void:
 	if !flipped && direction == -1 \
 			or flipped && direction == 1:
 		flipped = !flipped
 		Sprite.flip_h = flipped
+
+
+func take_damage(amount: float, decay: float):
+	print("Player says UFF")
+	#update_state(State.HIT)
 
 func _anim_attack_end() -> void:
 	state = State.MOVE
@@ -105,3 +111,4 @@ func _anim_attack_end() -> void:
 func _anim_parry_end() -> void:
 	state = State.MOVE
 	update_state(State.IDLE)
+

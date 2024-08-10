@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dsesq20h0pl82"]
+[gd_scene load_steps=23 format=3 uid="uid://beiyshx2j1xjg"]
 
 [ext_resource type="Script" path="res://Script/Player.gd" id="1_fg0r2"]
 [ext_resource type="Texture2D" uid="uid://q51gdylbfhp2" path="res://Sprite/Main_Character/FREE-Knight 2D Pixel Art/Sprite_with_outline/ATTACK.png" id="1_lo85t"]
@@ -566,6 +566,9 @@ _data = {
 "Walk": SubResource("Animation_pmmlj")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w8hwx"]
+size = Vector2(51, 96)
+
 [node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("AnimPlayer", "Sprite")]
 collision_layer = 2
 collision_mask = 9
@@ -586,3 +589,13 @@ hframes = 8
 libraries = {
 "": SubResource("AnimationLibrary_ty4sp")
 }
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 0
+
+[node name="HurtboxCollision" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(-1.5, 1)
+shape = SubResource("RectangleShape2D_w8hwx")
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

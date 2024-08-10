@@ -1,6 +1,9 @@
 extends Node2D
 
 var coins: int = 0
+var decay_max: float = 100.0
+var decay_speed: float = 1.0
+var decay_current: float = 0.0
 
 @export var UI: CanvasLayer
 @export var Player: CharacterBody2D
@@ -11,6 +14,7 @@ func _ready():
 
 func _process(delta):
 	move_camera()
+	decay(delta)
 
 func move_camera() -> void:
 	const LEFT_X_CAP: int = 0
@@ -28,8 +32,12 @@ func move_camera() -> void:
 	
 	Camera.transform.origin = Vector2(smoothed_horizontal_movement, 0)
 
-func get_player_position() -> Vector2:
-	return Player.get_transform().get_origin()
+func decay(delta: float):
+	decay_current += delta * decay_speed
+	if decay_current >= decay_max:
+		decay_current = decay_max
+	UI.update_decay(decay_current / decay_max)
+
 
 func add_coins():
 	coins += 1
@@ -38,3 +46,11 @@ func add_coins():
 func coins_decrease_by(n: int):
 	coins -= n
 	UI.update_coin_label(str(coins))
+
+
+func get_player_position() -> Vector2:
+	return Player.get_transform().get_origin()
+
+func damage_player(amount: float):
+	decay(amount)
+	Player.take_damage(amount, decay_current / decay_max)

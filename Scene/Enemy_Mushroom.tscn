@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cmrs5ncm1c83d"]
+[gd_scene load_steps=12 format=3 uid="uid://5ipkdxwfugik"]
 
 [ext_resource type="Script" path="res://Script/Enemy.gd" id="1_vfx6n"]
 [ext_resource type="Texture2D" uid="uid://co4j4catfwqs3" path="res://Sprite/Enemies/Forest_Monsters_FREE/Mushroom/Mushroom with VFX/Mushroom-Idle.png" id="1_wd85i"]

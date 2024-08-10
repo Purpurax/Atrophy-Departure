@@ -1,8 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://b5iebl120gdlv"]
+[gd_scene load_steps=20 format=3 uid="uid://cwy5u5v3v51ck"]
 
 [ext_resource type="FontFile" uid="uid://xjtbjnql0tf7" path="res://Fonts/Pixelart_Serif_Font_v02_by_ReffPixels/PixelSerif_16px_v02.ttf" id="1_4b6fg"]
 [ext_resource type="Script" path="res://Script/UI.gd" id="1_ph05n"]
 [ext_resource type="Texture2D" uid="uid://c0uw7k1vsyi0o" path="res://Sprite/Loot/GameItemsAnims-Sheet.png" id="3_ryuv5"]
+[ext_resource type="Texture2D" uid="uid://bux6f7dbeqill" path="res://Sprite/UI/DecayUnder.png" id="4_oguvn"]
+[ext_resource type="Texture2D" uid="uid://djsfjc4unaqcg" path="res://Sprite/UI/DecayProgress.png" id="5_xviy7"]
+[ext_resource type="Script" path="res://Scene/DecayBar.gd" id="6_lhq4e"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n06mf"]
 atlas = ExtResource("3_ryuv5")
@@ -128,7 +131,6 @@ scale = Vector2(2.625, 2.625)
 sprite_frames = SubResource("SpriteFrames_qrdt2")
 autoplay = "default"
 frame_progress = 0.802356
-<<<<<<< Updated upstream:Scene/UI.tscn
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="."]
 anchors_preset = 7
@@ -146,5 +148,3 @@ scale = Vector2(4, 4)
 texture_over = ExtResource("4_oguvn")
 texture_progress = ExtResource("5_xviy7")
 script = ExtResource("6_lhq4e")
-=======
->>>>>>> Stashed changes:Scene/UI2.tscn

@@ -5,18 +5,21 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -800.0
 const FAST_FALL_FACTOR = 4
 
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 enum State {IDLE, MOVE, ATTACK, PARRY}
+enum Decay {NONE, PARTIAL, RUST}
+
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var state: State = State.IDLE
+var decay: Decay = Decay.NONE
 var flipped: bool = false
-var rust = false
+
 
 
 @export var AnimPlayer: AnimationPlayer
 @export var Sprite: Sprite2D
 
 func _ready() -> void:
-	update_state(State.IDLE)
+	update_state(state, decay)
 
 
 func _physics_process(delta):
@@ -32,8 +35,6 @@ func _process(delta):
 		Attack()
 	if is_on_floor() and Input.is_action_just_pressed("Parry"):
 		Parry()
-	if Input.is_action_just_pressed("Rust"):
-		rust = true
 		
 func Movement() -> void:
 	if Input.is_action_just_pressed("Jump") and is_on_floor() and state != State.ATTACK and state != State.PARRY:
@@ -42,60 +43,65 @@ func Movement() -> void:
 	var direction: int = Input.get_axis("Left", "Right")
 	if direction and state != State.ATTACK and state != State.PARRY:
 		velocity.x = direction * SPEED
-		update_state(State.MOVE)
+		update_state(State.MOVE, decay)
 		flip_player(direction)
 	else:
-		update_state(State.IDLE)
+		update_state(State.IDLE, decay)
 		velocity.x = move_toward(velocity.x, 0, SPEED/7)
 	
 	move_and_slide()
 
 func Attack() -> void:
 	# calculate damage depending on Decay
-	update_state(State.ATTACK)
+	update_state(State.ATTACK, decay)
 
 func Parry() -> void:
-	update_state(State.PARRY)
+	update_state(State.PARRY, decay)
 
-func update_state(new_state: State) -> void:
-	if state == new_state:
+func update_state(new_state: State, new_decay: Decay) -> void:
+	if state == new_state and new_decay == decay:
 		return
 	if state == State.ATTACK or state == State.PARRY: # attacks cannot be canceled
 		return
 	state = new_state
+	decay = new_decay
+	
+	var animation_prefix: String
+	match decay:
+		Decay.NONE:
+			animation_prefix = ""
+		Decay.PARTIAL:
+			animation_prefix = "Partial Rust "
+		Decay.RUST:
+			animation_prefix = "Rust "
+	
 	match new_state:
 		State.IDLE:
-			if rust == false:
-				AnimPlayer.stop()
-				AnimPlayer.play("Idle")
-			else:
-				AnimPlayer.stop()
-				AnimPlayer.play("Rust Idle")
+			AnimPlayer.stop()
+			AnimPlayer.play(animation_prefix + "Idle")
 		State.MOVE:
-			if rust == false:
-				AnimPlayer.stop()
-				AnimPlayer.play("Walk")
-			else:
-				AnimPlayer.stop()
-				AnimPlayer.play("Rust Walking")
+			AnimPlayer.stop()
+			AnimPlayer.play(animation_prefix + "Walk")
 		State.ATTACK:
-			if rust == false:
-				AnimPlayer.stop()
-				AnimPlayer.play("Attack")
-			else: 
-				AnimPlayer.stop()
-				AnimPlayer.play("Rust Attack")
+			AnimPlayer.stop()
+			AnimPlayer.play(animation_prefix + "Attack")
 		State.PARRY:
-			if rust == false:
-				AnimPlayer.stop()
-				AnimPlayer.play("Parry")
-			else:
-				AnimPlayer.stop()
-				AnimPlayer.play("Rust Parry")
+			AnimPlayer.stop()
+			AnimPlayer.play(animation_prefix + "Parry")
+
+func update_decay(decay_percent: float):
+	var new_decay: Decay
+	if decay_percent >= 1.0:
+		new_decay = Decay.RUST
+	elif decay_percent >= 0.5:
+		new_decay = Decay.PARTIAL
+	else:
+		new_decay = Decay.NONE
+	
+	update_state(state, new_decay)
 
 func flip_player(direction: int) -> void:
-	if !flipped && direction == -1 \
-			or flipped && direction == 1:
+	if !flipped && direction == -1 or flipped && direction == 1:
 		flipped = !flipped
 		Sprite.flip_h = flipped
 
@@ -104,11 +110,6 @@ func take_damage(amount: float, decay: float):
 	print("Player says UFF")
 	#update_state(State.HIT)
 
-func _anim_attack_end() -> void:
+func _anim_end() -> void:
 	state = State.MOVE
-	update_state(State.IDLE)
-
-func _anim_parry_end() -> void:
-	state = State.MOVE
-	update_state(State.IDLE)
-
+	update_state(State.IDLE, decay)

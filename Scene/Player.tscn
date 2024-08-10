@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://beiyshx2j1xjg"]
+[gd_scene load_steps=32 format=3 uid="uid://dsesq20h0pl82"]
 
 [ext_resource type="Script" path="res://Script/Player.gd" id="1_fg0r2"]
 [ext_resource type="Texture2D" uid="uid://q51gdylbfhp2" path="res://Sprite/Main_Character/FREE-Knight 2D Pixel Art/Sprite_with_outline/ATTACK.png" id="1_lo85t"]
@@ -9,6 +9,11 @@
 [ext_resource type="Texture2D" uid="uid://b5k1dl4c0tput" path="res://Sprite/Main_Character/Slightly_Rusted/IDLE.png" id="7_sjgym"]
 [ext_resource type="Texture2D" uid="uid://dfn6p6kj0btj7" path="res://Sprite/Main_Character/Slightly_Rusted/WALK.png" id="8_kyxrx"]
 [ext_resource type="Texture2D" uid="uid://cf1y567j664a5" path="res://Sprite/Main_Character/Slightly_Rusted/PARRY.png" id="9_kjjdo"]
+[ext_resource type="Texture2D" uid="uid://b7cq81f7egrxv" path="res://Sprite/Main_Character/Fully Rusted/ATTACK.png" id="10_ycn0e"]
+[ext_resource type="Texture2D" uid="uid://irdl7l8i0u2o" path="res://Sprite/Main_Character/Fully Rusted/IDLE.png" id="11_m6i2b"]
+[ext_resource type="Texture2D" uid="uid://dkselcgjorhbt" path="res://Sprite/Main_Character/Fully Rusted/PARRY.png" id="12_1ncxy"]
+[ext_resource type="Texture2D" uid="uid://ch3yjkgqqx8iy" path="res://Sprite/Main_Character/Fully Rusted/WALK.png" id="13_efxyo"]
+[ext_resource type="Texture2D" uid="uid://davrjki0l46ja" path="res://Sprite/Main_Character/FREE-Knight 2D Pixel Art/Sprite_with_outline/HURT.png" id="14_yr2fd"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3v04e"]
 radius = 20.0
@@ -16,7 +21,7 @@ height = 92.0
 
 [sub_resource type="Animation" id="Animation_1dj0n"]
 resource_name = "Attack"
-length = 0.7
+length = 0.8
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -60,10 +65,10 @@ tracks/3/path = NodePath("Sprite2D:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 1, 0]
+"values": [0, 1, 2, 3, 4, 5, 6]
 }
 tracks/4/type = "method"
 tracks/4/imported = false
@@ -72,11 +77,11 @@ tracks/4/path = NodePath(".")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.7),
+"times": PackedFloat32Array(0.8),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
-"method": &"_anim_attack_end"
+"method": &"_anim_end"
 }]
 }
 
@@ -131,21 +136,6 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [1]
-}
-
-[sub_resource type="Animation" id="Animation_vfb5i"]
-resource_name = "Jumping"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("1_lo85t")]
 }
 
 [sub_resource type="Animation" id="Animation_nskad"]
@@ -209,7 +199,7 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
-"method": &"_anim_parry_end"
+"method": &"_anim_end"
 }]
 }
 
@@ -264,8 +254,62 @@ tracks/3/keys = {
 "values": [1]
 }
 
+[sub_resource type="Animation" id="Animation_pmmlj"]
+resource_name = "Walk"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_u1nbd")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
 [sub_resource type="Animation" id="Animation_lr3nd"]
-resource_name = "Rust Attack"
+resource_name = "Partial Rust Attack"
+length = 0.8
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -325,12 +369,12 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
-"method": &"_anim_attack_end"
+"method": &"_anim_end"
 }]
 }
 
 [sub_resource type="Animation" id="Animation_2x51l"]
-resource_name = "Rust Idle"
+resource_name = "Partial Rust Idle"
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -382,7 +426,7 @@ tracks/3/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_6tm0q"]
-resource_name = "Rust Parry"
+resource_name = "Partial Rust Parry"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -426,7 +470,7 @@ tracks/3/path = NodePath("Sprite2D:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7]
@@ -438,16 +482,16 @@ tracks/4/path = NodePath(".")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.8),
+"times": PackedFloat32Array(1),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
-"method": &"_anim_parry_end"
+"method": &"_anim_end"
 }]
 }
 
 [sub_resource type="Animation" id="Animation_l62ka"]
-resource_name = "Rust Walking"
+resource_name = "Partial Rust Walk"
 length = 0.8
 loop_mode = 1
 tracks/0/type = "value"
@@ -493,16 +537,132 @@ tracks/3/path = NodePath("Sprite2D:texture")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("8_kyxrx"), ExtResource("8_kyxrx")]
+"values": [ExtResource("8_kyxrx")]
 }
 
-[sub_resource type="Animation" id="Animation_pmmlj"]
-resource_name = "Walk"
+[sub_resource type="Animation" id="Animation_xku33"]
+resource_name = "Rust Attack"
 length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:vframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("10_ycn0e")]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_anim_end"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_em737"]
+resource_name = "Rust Idle"
 loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:vframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("11_m6i2b")]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_8y574"]
+resource_name = "Rust Parry"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -510,10 +670,10 @@ tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("5_u1nbd"), ExtResource("5_u1nbd")]
+"values": [ExtResource("12_1ncxy")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -546,23 +706,160 @@ tracks/3/path = NodePath("Sprite2D:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_anim_end"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_7kglh"]
+resource_name = "Rust Walk"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:vframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("13_efxyo")]
+}
+
+[sub_resource type="Animation" id="Animation_lgnh8"]
+resource_name = "Hurt"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("14_yr2fd")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.9),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_anim_end"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ty4sp"]
 _data = {
 "Attack": SubResource("Animation_1dj0n"),
+"Hurt": SubResource("Animation_lgnh8"),
 "Idle": SubResource("Animation_8ud3v"),
-"Jumping": SubResource("Animation_vfb5i"),
 "Parry": SubResource("Animation_nskad"),
+"Partial Rust Attack": SubResource("Animation_lr3nd"),
+"Partial Rust Idle": SubResource("Animation_2x51l"),
+"Partial Rust Parry": SubResource("Animation_6tm0q"),
+"Partial Rust Walk": SubResource("Animation_l62ka"),
 "RESET": SubResource("Animation_krp5w"),
-"Rust Attack": SubResource("Animation_lr3nd"),
-"Rust Idle": SubResource("Animation_2x51l"),
-"Rust Parry": SubResource("Animation_6tm0q"),
-"Rust Walking": SubResource("Animation_l62ka"),
+"Rust Attack": SubResource("Animation_xku33"),
+"Rust Idle": SubResource("Animation_em737"),
+"Rust Parry": SubResource("Animation_8y574"),
+"Rust Walk": SubResource("Animation_7kglh"),
 "Walk": SubResource("Animation_pmmlj")
 }
 
@@ -589,6 +886,7 @@ hframes = 8
 libraries = {
 "": SubResource("AnimationLibrary_ty4sp")
 }
+autoplay = "Idle"
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 16

@@ -1,8 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://d0unxj4wqs361"]
+[gd_scene load_steps=17 format=3 uid="uid://d0unxj4wqs361"]
 
 [ext_resource type="Script" path="res://Script/Coin.gd" id="1_erxcl"]
 [ext_resource type="Texture2D" uid="uid://c0uw7k1vsyi0o" path="res://Sprite/Loot/GameItemsAnims-Sheet.png" id="2_v35p0"]
-[ext_resource type="AudioStream" uid="uid://b2jrxmnpex554" path="res://Sounds/Coin.wav" id="3_a6v53"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ys4i8"]
 atlas = ExtResource("2_v35p0")
@@ -99,11 +98,19 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_xcqma"]
 radius = 8.0
 
+<<<<<<< Updated upstream
 [node name="Coin" type="Area2D"]
+=======
+[node name="Coin2" type="Area2D" node_paths=PackedStringArray("Audio")]
+>>>>>>> Stashed changes
 scale = Vector2(2, 2)
 collision_layer = 8
 collision_mask = 2
 script = ExtResource("1_erxcl")
+<<<<<<< Updated upstream
+=======
+Audio = NodePath("")
+>>>>>>> Stashed changes
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -113,10 +120,6 @@ frame_progress = 0.12701
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_xcqma")
-
-[node name="PickupSFX" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_a6v53")
-volume_db = -5.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]

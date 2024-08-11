@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://7svxk0vyonj2"]
+
+[ext_resource type="Script" path="res://Script/damage_number.gd" id="1_6rb4k"]
+[ext_resource type="FontFile" uid="uid://b6q5voprl0p40" path="res://Fonts/Pixelart_Serif_Font_v02_by_ReffPixels/PixelSerif_16px_v02.otf" id="1_efhka"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uuikm"]
+size = Vector2(26, 14)
+
+[sub_resource type="Theme" id="Theme_n6uey"]
+default_font = ExtResource("1_efhka")
+
+[node name="Damage_Number" type="RigidBody2D"]
+script = ExtResource("1_6rb4k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(10, 6)
+shape = SubResource("RectangleShape2D_uuikm")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+
+[node name="Label" type="Label" parent="CanvasModulate"]
+offset_right = 21.0
+offset_bottom = 13.0
+theme = SubResource("Theme_n6uey")
+text = "200"

@@ -22,12 +22,13 @@ var health: float = 0
 #endregion
 
 
-
 @export var AnimPlayer: AnimationPlayer
 @export var Sprite: Sprite2D
 @export var Hitbox: Area2D
 @export var HitboxCollision: CollisionShape2D
 @export var HurtboxCollision: CollisionShape2D
+
+@onready var World = get_tree().root.get_child(0)
 
 func _ready() -> void:
 	health = max_health
@@ -51,6 +52,7 @@ func _process(delta):
 func Movement() -> void:
 	if Input.is_action_just_pressed("Jump") and is_on_floor() and state != State.ATTACK and state != State.PARRY and state != State.HIT and state != State.DEATH:
 		velocity.y = JUMP_VELOCITY
+		World.play_audio("Jump")
 	
 	var direction: int = Input.get_axis("Left", "Right")
 	if direction and state != State.ATTACK and state != State.PARRY and state != State.HIT and state != State.DEATH:
@@ -162,6 +164,7 @@ func _anim_attack_time(time: float) -> void:
 		HitboxCollision.shape.radius = 13
 		HitboxCollision.shape.height = 166
 		HitboxCollision.disabled = false
+		World.play_audio("Sword Hit")
 	elif time == 0.7:
 		HitboxCollision.position = Vector2(32, 12)
 		HitboxCollision.shape.radius = 9

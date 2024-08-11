@@ -30,7 +30,8 @@ func _process(delta):
 
 func open_chest():
 	# generate loot and send to world, then send from world to player
-	World.coins_decrease_by(10) 
+	World.coins_decrease_by(10)
+	World.play_audio("Chest Open")
 	ButtonPrompt.visible = false
 	Price.visible = false
 	AnimPlayer.play("Chest Opens")

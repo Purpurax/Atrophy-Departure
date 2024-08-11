@@ -14,8 +14,10 @@ var decay_current: float = 0.0
 @export var UI: CanvasLayer
 @export var Player: CharacterBody2D
 @export var Camera: Camera2D
+@export var AudioPlayer: Node2D
 
 @onready var Coin_Instance = preload("res://Scene/PhysikCoin.tscn")
+@onready var Damage_Number_Instance = preload("res://Scene/damage_number.tscn")
 
 func _ready():
 	UI.update_coin_label(str(coins))
@@ -50,9 +52,17 @@ func scatter_coins_from(position: Vector2):
 		coin.position = position
 		coin.set_velocity(Vector2(COIN_VELOCITY * randf_range(-1.0, 1.0), -COIN_VELOCITY * randf_range(0.0, 1.0) - 150.0))
 		add_child(coin)
+		
+		var dmg_number = Damage_Number_Instance.instantiate()
+		dmg_number.position = position
+		dmg_number.set_velocity(Vector2(COIN_VELOCITY * randf_range(-1.0, 1.0), -COIN_VELOCITY * randf_range(0.0, 1.0) - 150.0))
+		add_child(dmg_number)
 
 func get_coins():
 	return coins
+
+func play_audio(name: String):
+	AudioPlayer.play_audio(name)
 
 func add_coins():
 	coins += 1

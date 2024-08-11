@@ -1,5 +1,10 @@
 extends Node2D
 
+const LEFT_CAMERA_CAP: int = 0
+const TOP_CAMERA_CAP: int = -300
+const RIGHT_CAMERA_CAP: int = 10000
+const BOTTOM_CAMERA_CAP: int = 200
+
 var coins: int = 0
 var decay_max: float = 100.0
 var decay_speed: float = 1.0
@@ -25,7 +30,8 @@ func move_camera() -> void:
 	var smoothed_horizontal_movement: int = move_toward(camera_position.x, player_position.x, 0.7 * sqrt(abs(difference.x)))
 	var smoothed_vertical_movement: int = move_toward(camera_position.y, player_position.y, 0.7 * sqrt(abs(difference.y)))
 	
-	Camera.transform.origin = Vector2(smoothed_horizontal_movement, smoothed_vertical_movement)
+	Camera.transform.origin = Vector2(min(max(smoothed_horizontal_movement, LEFT_CAMERA_CAP), RIGHT_CAMERA_CAP), \
+		min(max(smoothed_vertical_movement, TOP_CAMERA_CAP), BOTTOM_CAMERA_CAP))
 
 func decay(delta: float):
 	decay_current += delta * decay_speed

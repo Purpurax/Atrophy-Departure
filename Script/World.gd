@@ -14,6 +14,9 @@ var decay_speed: float = 1.0
 var decay_current: float = 0.0
 
 var decay_mend = false
+var coin_reap = false
+var coin_vamp = false
+var decay_slow = false
 
 @export var UI: CanvasLayer
 @export var Player: CharacterBody2D
@@ -49,6 +52,8 @@ func decay(delta: float):
 	UI.update_decay(decay_current / decay_max)
 	Player.update_decay(decay_current / decay_max)
 
+func UpdateHealth( percentage : float):
+	UI.update_health(percentage)
 
 func scatter_coins_from(position: Vector2):
 	for _i in range(6):
@@ -81,10 +86,16 @@ func add_coins():
 	coins += 1
 	if decay_mend:
 		decay_current -= 0.5
+	if coin_reap:
+		Player.increase_damage(0.5)
+	if coin_vamp:
+		Player.heal(0.5)
 	UI.update_coin_label(str(coins))
 
 func coins_decrease_by(n: int):
 	coins -= n
+	if coin_reap:
+		Player.increase_damage(-n+0.5)
 	UI.update_coin_label(str(coins))
 
 
@@ -106,15 +117,19 @@ func delete_entity(entity: Node2D):
 
 
 func generate_item_frame() -> int:
-	#match randi_range(0, 3):
+	#match randi_range(0, 7):
 		#0: return 3 # Item Increases Damage
 		#1: return 106 # Item Increases max_health
-		#2: return 2
+		#2: return 35 # Item Increases Damage with Coins
 		#3: return 152 # Item Restores Decay when picking up Coins
+		#4: return 196 # Item increases Speed
+		#5: return 191 # Item slows decay
+		#6: return 65 # Items Heals player with coins
+		#7: return 49 # Item decreases damage taken
 		#_:
 			#print("random number is not in range")
 			#return 22
-	return 152
+	return 49
 
 func equip_item(frame: int) -> bool:
 	var successful = UI.equip_item(frame)
@@ -130,4 +145,15 @@ func update_player_stats(frame: int):
 			Player.increase_maxhealth(20.0)
 		152:
 			decay_mend = true
-
+		35:
+			coin_reap = true
+			Player.increase_damage(coins)
+		196:
+			Player.increase_speed(30.0)
+		191:
+			decay_slow = true
+			decay_speed -= 0.1
+		65:
+			coin_vamp = true
+		49:
+			Player.activate_shield(10.0)

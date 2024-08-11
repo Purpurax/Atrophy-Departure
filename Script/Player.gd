@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-const SPEED = 400.0
+var speed = 400.0
 const JUMP_VELOCITY = -800.0
 const HIT_VELOCITY = 1200.0
 const HIT_VELOCITY_VERTICAL = -500.0
@@ -14,6 +14,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var state: State = State.IDLE
 var decay: Decay = Decay.NONE
 var flipped: bool = false
+var shield = 0
 
 #region Player Properties
 var death: bool = false
@@ -57,12 +58,12 @@ func Movement() -> void:
 	
 	var direction: int = Input.get_axis("Left", "Right")
 	if direction and state != State.ATTACK and state != State.PARRY and state != State.HIT and state != State.DEATH:
-		velocity.x = direction * SPEED
+		velocity.x = direction * speed
 		update_state(State.MOVE, decay)
 		flip_player(direction)
 	elif state != State.HIT and state != State.DEATH:
 		update_state(State.IDLE, decay)
-	velocity.x = move_toward(velocity.x, 0, SPEED/7)
+	velocity.x = move_toward(velocity.x, 0, speed/7)
 	
 	move_and_slide()
 
@@ -140,7 +141,7 @@ func take_damage(amount: float, decay_percentage: float, direction: int) -> floa
 	flip_player(-direction)
 	velocity.y = HIT_VELOCITY_VERTICAL
 	
-	var truedmg = amount * (decay_percentage * 30)
+	var truedmg = amount * (decay_percentage * 30) - shield
 	
 	health -= int(truedmg)
 	death = health <= 0
@@ -196,3 +197,14 @@ func increase_damage(amount: float):
 func increase_maxhealth(amount: float):
 	max_health += amount
 	print(max_health)
+
+func increase_speed(amount: float):
+	speed += amount
+
+func heal(amount: float):
+	health += amount
+	World.UpdateHealth(health / max_health)
+
+func activate_shield(amount: float):
+	shield = amount
+	

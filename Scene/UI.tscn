@@ -106,7 +106,7 @@ script = ExtResource("1_ph05n")
 coins_label = NodePath("Panel/CoinsLabel")
 DecayProgressBar = NodePath("DecayMeter")
 HealthBar = NodePath("HealthBar")
-Items = [NodePath("Container/Item"), NodePath("Container/Item2"), NodePath("Container/Item3"), NodePath("Container/Item4")]
+Items = [NodePath("Container/Item"), NodePath("Container/Item2"), NodePath("Container/Item3"), NodePath("Container/Item4"), NodePath("Container/Item5"), NodePath("Container/Item6"), NodePath("Container/Item7")]
 
 [node name="Panel" type="AspectRatioContainer" parent="."]
 anchors_preset = 3
@@ -166,7 +166,7 @@ texture_progress = ExtResource("7_7si35")
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -173.0
+offset_left = -258.0
 offset_top = 41.0
 offset_right = -13.0
 offset_bottom = 91.0
@@ -184,4 +184,13 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Item4" parent="Container" instance=ExtResource("8_m6s3p")]
+layout_mode = 2
+
+[node name="Item5" parent="Container" instance=ExtResource("8_m6s3p")]
+layout_mode = 2
+
+[node name="Item6" parent="Container" instance=ExtResource("8_m6s3p")]
+layout_mode = 2
+
+[node name="Item7" parent="Container" instance=ExtResource("8_m6s3p")]
 layout_mode = 2

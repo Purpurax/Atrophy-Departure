@@ -34,6 +34,8 @@ func decay(delta: float):
 	UI.update_decay(decay_current / decay_max)
 	Player.update_decay(decay_current / decay_max)
 
+func get_coins():
+	return coins
 
 func add_coins():
 	coins += 1

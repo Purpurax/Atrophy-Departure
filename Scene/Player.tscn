@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://dsesq20h0pl82"]
+[gd_scene load_steps=43 format=3 uid="uid://biiwt5o120pby"]
 
 [ext_resource type="Script" path="res://Script/Player.gd" id="1_fg0r2"]
 [ext_resource type="Texture2D" uid="uid://q51gdylbfhp2" path="res://Sprite/Main_Character/FREE-Knight 2D Pixel Art/Sprite_with_outline/ATTACK.png" id="1_lo85t"]
@@ -20,8 +20,9 @@
 [ext_resource type="Texture2D" uid="uid://bebnl7owq77ug" path="res://Sprite/Main_Character/Fully Rusted/DEATH.png" id="18_ul2ye"]
 [ext_resource type="Texture2D" uid="uid://b7j8t7r4767pa" path="res://Sprite/Main_Character/Slightly_Rusted/DEATH.png" id="19_o4cl4"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mpci5"]
-size = Vector2(41, 86)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3v04e"]
+radius = 20.0
+height = 92.0
 
 [sub_resource type="Animation" id="Animation_1dj0n"]
 resource_name = "Attack"
@@ -1259,9 +1260,8 @@ _data = {
 "Walk": SubResource("Animation_pmmlj")
 }
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x4d06"]
-radius = 19.5
-height = 89.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w8hwx"]
+size = Vector2(51, 96)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_klx2k"]
 radius = 7.0
@@ -1278,8 +1278,7 @@ HitboxCollision = NodePath("Hitbox/HitboxCollision")
 HurtboxCollision = NodePath("Player Hurtbox/HurtboxCollision")
 
 [node name="PhysicalCollision" type="CollisionShape2D" parent="."]
-position = Vector2(-1.5, 3)
-shape = SubResource("RectangleShape2D_mpci5")
+shape = SubResource("CapsuleShape2D_3v04e")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -1298,8 +1297,8 @@ collision_layer = 16
 collision_mask = 0
 
 [node name="HurtboxCollision" type="CollisionShape2D" parent="Player Hurtbox"]
-position = Vector2(-1.5, 3.5)
-shape = SubResource("CapsuleShape2D_x4d06")
+position = Vector2(-1.5, 1)
+shape = SubResource("RectangleShape2D_w8hwx")
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 32

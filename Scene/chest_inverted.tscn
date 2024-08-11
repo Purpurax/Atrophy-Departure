@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dmajyvditdk1x"]
+[gd_scene load_steps=10 format=3 uid="uid://dmajyvditdk1x"]
 
 [ext_resource type="Script" path="res://Scene/chest.gd" id="1_di30j"]
 [ext_resource type="Texture2D" uid="uid://bxd2bnrtw45yo" path="res://Sprite/Loot/Chest.png" id="2_3t1b5"]
 [ext_resource type="Texture2D" uid="uid://ddfgwvc8ay80g" path="res://Sprite/Button Prompts/icons-keyboard-16x16-1bit-ansdor.png" id="3_uhjtd"]
+[ext_resource type="FontFile" uid="uid://xjtbjnql0tf7" path="res://Fonts/Pixelart_Serif_Font_v02_by_ReffPixels/PixelSerif_16px_v02.ttf" id="4_7dkka"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y1wqx"]
 size = Vector2(33, 19)
@@ -119,12 +120,13 @@ _data = {
 "RESET": SubResource("Animation_nnj6m")
 }
 
-[node name="Chest" type="CharacterBody2D" node_paths=PackedStringArray("ButtonPrompt", "AnimPlayer")]
+[node name="Chest" type="CharacterBody2D" node_paths=PackedStringArray("ButtonPrompt", "AnimPlayer", "Price")]
 position = Vector2(-1, -44)
 scale = Vector2(3, 3)
 script = ExtResource("1_di30j")
 ButtonPrompt = NodePath("Button Prompt")
 AnimPlayer = NodePath("AnimationPlayer")
+Price = NodePath("Area2D/Price")
 
 [node name="Chest Sprite" type="Sprite2D" parent="."]
 position = Vector2(9.382, 17.667)
@@ -150,6 +152,17 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(12.9167, 20.8333)
 shape = SubResource("RectangleShape2D_b2bg5")
+
+[node name="Price" type="Label" parent="Area2D"]
+offset_left = -3.66667
+offset_top = -39.6667
+offset_right = 36.3333
+offset_bottom = -16.6667
+theme_override_fonts/font = ExtResource("4_7dkka")
+theme_override_font_sizes/font_size = 16
+text = "10 $"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

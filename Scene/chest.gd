@@ -25,7 +25,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _process(delta):
-	if player_in_proximity == true and Input.is_action_pressed("Interact") and World.get_coins() >= 10:  
+	if player_in_proximity == true and Input.is_action_pressed("Interact") and !open and World.get_coins() >= 10:  
 		open_chest()
 
 func open_chest():
@@ -36,6 +36,13 @@ func open_chest():
 	Price.visible = false
 	AnimPlayer.play("Chest Opens")
 	open = true
+	
+	var frame = World.generate_item_frame()
+	# display frame over chest ?? when, for how long
+	
+	var player_can_take_item = World.equip_item(frame)
+	if !player_can_take_item:
+		print("Player is full")
 
 
 func _on_area_2d_body_entered(body):

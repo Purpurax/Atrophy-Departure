@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://uhvlgddboqe8"]
+
+[ext_resource type="Script" path="res://Scene/Item.gd" id="1_yht1o"]
+[ext_resource type="Texture2D" uid="uid://bfdbj5bn31bev" path="res://Sprite/Loot/items_sheet.png" id="2_iaf0b"]
+
+[node name="Item" type="TextureRect" node_paths=PackedStringArray("Sprite")]
+anchors_preset = -1
+anchor_left = -0.014
+anchor_top = -0.025
+anchor_right = 0.014
+anchor_bottom = 0.024
+offset_left = 16.128
+offset_top = 16.2
+offset_right = -16.128
+offset_bottom = -15.552
+scale = Vector2(2, 2)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_yht1o")
+Sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
+texture = ExtResource("2_iaf0b")
+hframes = 15
+vframes = 14

@@ -19,7 +19,7 @@ var flipped: bool = false
 var death: bool = false
 var max_health: float = 100
 var health: float = 0
-var damage: float = 40.0
+var damage: float = 19.0
 #endregion
 
 
@@ -188,3 +188,10 @@ func _on_hitbox_area_entered(area):
 
 func death_box_hit():
 	queue_free()
+
+func increase_damage(amount: float):
+	damage += amount
+
+func increase_maxhealth(amount: float):
+	max_health += amount
+	print(max_health)

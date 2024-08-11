@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cwy5u5v3v51ck"]
+[gd_scene load_steps=22 format=3 uid="uid://cj8tmuccntbdb"]
 
 [ext_resource type="FontFile" uid="uid://xjtbjnql0tf7" path="res://Fonts/Pixelart_Serif_Font_v02_by_ReffPixels/PixelSerif_16px_v02.ttf" id="1_4b6fg"]
 [ext_resource type="Script" path="res://Script/UI.gd" id="1_ph05n"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://djsfjc4unaqcg" path="res://Sprite/UI/DecayProgress.png" id="5_xviy7"]
 [ext_resource type="Texture2D" uid="uid://bb6rq1osinf5a" path="res://Sprite/UI/PlayerHealthUpper.png" id="6_yu3pt"]
 [ext_resource type="Texture2D" uid="uid://bmasg476lwxjo" path="res://Sprite/UI/PlayerHealthProgress.png" id="7_7si35"]
+[ext_resource type="PackedScene" uid="uid://uhvlgddboqe8" path="res://Scene/Item_UI.tscn" id="8_m6s3p"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n06mf"]
 atlas = ExtResource("3_ryuv5")
@@ -100,11 +101,12 @@ animations = [{
 "speed": 8.0
 }]
 
-[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("coins_label", "DecayProgressBar", "HealthBar")]
+[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("coins_label", "DecayProgressBar", "HealthBar", "Items")]
 script = ExtResource("1_ph05n")
 coins_label = NodePath("Panel/CoinsLabel")
 DecayProgressBar = NodePath("DecayMeter")
 HealthBar = NodePath("HealthBar")
+Items = [NodePath("Container/Item"), NodePath("Container/Item2"), NodePath("Container/Item3"), NodePath("Container/Item4")]
 
 [node name="Panel" type="AspectRatioContainer" parent="."]
 anchors_preset = 3
@@ -159,3 +161,27 @@ offset_bottom = 46.0
 scale = Vector2(3, 3)
 texture_over = ExtResource("6_yu3pt")
 texture_progress = ExtResource("7_7si35")
+
+[node name="Container" type="HBoxContainer" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -173.0
+offset_top = 41.0
+offset_right = -13.0
+offset_bottom = 91.0
+grow_horizontal = 0
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="Item" parent="Container" instance=ExtResource("8_m6s3p")]
+layout_mode = 2
+
+[node name="Item2" parent="Container" instance=ExtResource("8_m6s3p")]
+layout_mode = 2
+
+[node name="Item3" parent="Container" instance=ExtResource("8_m6s3p")]
+layout_mode = 2
+
+[node name="Item4" parent="Container" instance=ExtResource("8_m6s3p")]
+layout_mode = 2

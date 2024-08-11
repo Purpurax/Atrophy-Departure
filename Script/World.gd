@@ -11,6 +11,8 @@ var decay_max: float = 150.0
 var decay_speed: float = 1.0
 var decay_current: float = 0.0
 
+var decay_mend = false
+
 @export var UI: CanvasLayer
 @export var Player: CharacterBody2D
 @export var Camera: Camera2D
@@ -66,6 +68,8 @@ func play_audio(name: String):
 
 func add_coins():
 	coins += 1
+	if decay_mend:
+		decay_current -= 0.5
 	UI.update_coin_label(str(coins))
 
 func coins_decrease_by(n: int):
@@ -88,4 +92,31 @@ func delete_entity(entity: Node2D):
 		print("GAME OVER")
 		queue_free()
 	entity.call_deferred("queue_free")
+
+
+func generate_item_frame() -> int:
+	#match randi_range(0, 3):
+		#0: return 3 # Item Increases Damage
+		#1: return 106 # Item Increases max_health
+		#2: return 2
+		#3: return 152 # Item Restores Decay when picking up Coins
+		#_:
+			#print("random number is not in range")
+			#return 22
+	return 152
+
+func equip_item(frame: int) -> bool:
+	var successful = UI.equip_item(frame)
+	# TODO update Player stats
+	update_player_stats(frame)
+	return successful
+
+func update_player_stats(frame: int):
+	match frame:
+		3:
+			Player.increase_damage(10.0)
+		106:
+			Player.increase_maxhealth(20.0)
+		152:
+			decay_mend = true
 

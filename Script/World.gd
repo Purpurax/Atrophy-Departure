@@ -2,7 +2,7 @@ extends Node2D
 
 const LEFT_CAMERA_CAP: int = 0
 const TOP_CAMERA_CAP: int = -300
-const RIGHT_CAMERA_CAP: int = 10000
+const RIGHT_CAMERA_CAP: int = 20000
 const BOTTOM_CAMERA_CAP: int = 300
 const COIN_VELOCITY: int = 200
 const DMG_VELOCITY: int = 100

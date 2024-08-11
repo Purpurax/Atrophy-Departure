@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://dtv2rhwaqkdy"]
 
-[ext_resource type="PackedScene" uid="uid://biiwt5o120pby" path="res://Scene/Player.tscn" id="1_k76df"]
+[ext_resource type="PackedScene" uid="uid://87e1alhldgdw" path="res://Scene/Player.tscn" id="1_k76df"]
 [ext_resource type="Script" path="res://Script/World.gd" id="1_o026n"]
 [ext_resource type="PackedScene" uid="uid://doc6d7rxr6law" path="res://Scene/tile_map.tscn" id="4_6f6ma"]
 [ext_resource type="PackedScene" path="res://Scene/Coin.tscn" id="4_nuaeg"]
@@ -226,10 +226,12 @@ position = Vector2(10540, -56)
 [node name="EnemyLurp3" parent="." instance=ExtResource("14_07do1")]
 position = Vector2(9933, 516)
 
-[node name="DeathBox6" parent="." instance=ExtResource("11_n580b")]
+[node name="DeathBox6" parent="." node_paths=PackedStringArray("World") instance=ExtResource("11_n580b")]
 position = Vector2(9782.89, 566.405)
 scale = Vector2(11.525, 1)
+World = NodePath("..")
 
-[node name="DeathBox7" parent="." instance=ExtResource("11_n580b")]
+[node name="DeathBox7" parent="." node_paths=PackedStringArray("World") instance=ExtResource("11_n580b")]
 position = Vector2(7295.67, 568)
 scale = Vector2(8.32, 1)
+World = NodePath("..")

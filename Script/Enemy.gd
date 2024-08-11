@@ -14,6 +14,7 @@ var on_player: bool = false
 var time_elapsed: float = 0.0
 var time_elapsed_hit: float = 0.0
 var health: int = 0
+var death: bool = false
 
 #region Properties
 var stationary: bool
@@ -106,7 +107,7 @@ func Death() -> void:
 func update_state(new_state: State) -> void:
 	if state == new_state:
 		return
-	if state == State.ATTACK or state == State.HIT: # attacks cannot be canceled
+	if (state == State.ATTACK or state == State.HIT or state == State.DEATH) and new_state != State.HIT: # attacks cannot be canceled
 		return
 	state = new_state
 	match new_state:
@@ -122,6 +123,9 @@ func update_state(new_state: State) -> void:
 		State.HIT:
 			AnimPlayer.stop()
 			AnimPlayer.play("Hit")
+		State.DEATH:
+			AnimPlayer.stop()
+			AnimPlayer.play("Death")
 
 func flip_player(direction: int) -> void:
 	if !flipped && direction == -1 or flipped && direction == 1:
@@ -139,10 +143,8 @@ func _anim_parry_end() -> void:
 func _anim_hit_end() -> void:
 	state = State.MOVE
 	update_state(State.IDLE)
-
-func _anim_death_start() -> void:
-	# drop stuff
-	pass
+	if death:
+		Death()
 
 func _anim_death_end() -> void:
 	queue_free()
@@ -163,6 +165,5 @@ func _on_hurtbox_area_entered(area):
 	var damage_taken: int = int(str(area.name))
 	health -= damage_taken
 	if health <= 0:
-		Death()
-	else:
-		Hit()
+		death = true
+	Hit()

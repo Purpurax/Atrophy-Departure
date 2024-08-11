@@ -1,19 +1,22 @@
-[gd_scene load_steps=15 format=3 uid="uid://dtv2rhwaqkdy"]
+[gd_scene load_steps=16 format=3 uid="uid://dtv2rhwaqkdy"]
 
-[ext_resource type="PackedScene" uid="uid://87e1alhldgdw" path="res://Scene/Player.tscn" id="1_k76df"]
+[ext_resource type="PackedScene" uid="uid://dsesq20h0pl82" path="res://Scene/Player.tscn" id="1_k76df"]
 [ext_resource type="Script" path="res://Script/World.gd" id="1_o026n"]
 [ext_resource type="PackedScene" uid="uid://doc6d7rxr6law" path="res://Scene/tile_map.tscn" id="4_6f6ma"]
-[ext_resource type="PackedScene" path="res://Scene/Coin.tscn" id="4_nuaeg"]
-[ext_resource type="PackedScene" uid="uid://cgta2a8elkmjh" path="res://Scene/Enemy_Mushroom.tscn" id="6_2rsi8"]
-[ext_resource type="PackedScene" uid="uid://cj8tmuccntbdb" path="res://Scene/UI.tscn" id="6_37pc7"]
+[ext_resource type="PackedScene" uid="uid://d0unxj4wqs361" path="res://Scene/Coin.tscn" id="4_nuaeg"]
+[ext_resource type="PackedScene" uid="uid://cmrs5ncm1c83d" path="res://Scene/Enemy_Mushroom.tscn" id="6_2rsi8"]
+[ext_resource type="PackedScene" uid="uid://cj8tmuccntbdb" path="res://Scene/ui.tscn" id="6_37pc7"]
 [ext_resource type="PackedScene" uid="uid://uix2mi250lyk" path="res://Scene/chest.tscn" id="8_0g2f7"]
 [ext_resource type="PackedScene" uid="uid://dmajyvditdk1x" path="res://Scene/chest_inverted.tscn" id="9_n2pnf"]
 [ext_resource type="PackedScene" uid="uid://dks64m37h3pve" path="res://Scene/tutorial.tscn" id="9_vkaoh"]
-[ext_resource type="PackedScene" uid="uid://dkvvlcpeh6ty1" path="res://Scene/FillerBackground.tscn" id="10_seocx"]
-[ext_resource type="PackedScene" uid="uid://cek5ipfyi6k3q" path="res://Scene/DeathBox.tscn" id="11_n580b"]
+[ext_resource type="PackedScene" uid="uid://bgd64q8na7wm" path="res://Scene/FillerBackground.tscn" id="10_seocx"]
+[ext_resource type="PackedScene" uid="uid://ra1qdgtv5bup" path="res://Scene/DeathBox.tscn" id="11_n580b"]
 [ext_resource type="PackedScene" uid="uid://n8etcvxqsdnj" path="res://Scene/tutorial2.tscn" id="12_l2ck1"]
-[ext_resource type="PackedScene" uid="uid://cnqg1ogskwm0t" path="res://Scene/Enemy_Lurp.tscn" id="14_07do1"]
-[ext_resource type="PackedScene" path="res://Scene/audio_player.tscn" id="14_cvk81"]
+[ext_resource type="PackedScene" uid="uid://dtb1apdmccv8e" path="res://Scene/Enemy_Lurp.tscn" id="14_07do1"]
+[ext_resource type="PackedScene" uid="uid://bqegxofiknybn" path="res://Scene/audio_player.tscn" id="14_cvk81"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8h4dj"]
+size = Vector2(61, 128)
 
 [node name="World" type="Node2D" node_paths=PackedStringArray("UI", "Player", "Camera", "AudioPlayer")]
 script = ExtResource("1_o026n")
@@ -24,6 +27,7 @@ AudioPlayer = NodePath("Camera/AudioPlayer")
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(-4, 94)
+zoom = Vector2(1.4, 1.4)
 
 [node name="AudioPlayer" parent="Camera" instance=ExtResource("14_cvk81")]
 position = Vector2(4, -94)
@@ -55,7 +59,6 @@ position = Vector2(287, -16)
 position = Vector2(1505.37, -42.31)
 
 [node name="Player" parent="." instance=ExtResource("1_k76df")]
-position = Vector2(-61, 2)
 
 [node name="UI" parent="." instance=ExtResource("6_37pc7")]
 
@@ -328,3 +331,14 @@ position = Vector2(13781, 310)
 
 [node name="Chest7" parent="." instance=ExtResource("8_0g2f7")]
 position = Vector2(5121, 70)
+
+[node name="VictoryArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VictoryArea"]
+position = Vector2(15606.5, 314)
+shape = SubResource("RectangleShape2D_8h4dj")
+
+[connection signal="area_entered" from="VictoryArea" to="." method="_on_victory_area_area_entered"]
+[connection signal="body_entered" from="VictoryArea" to="." method="_on_victory_area_body_entered"]

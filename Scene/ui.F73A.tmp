@@ -1,0 +1,253 @@
+[gd_scene load_steps=23 format=3 uid="uid://cj8tmuccntbdb"]
+
+[ext_resource type="FontFile" uid="uid://xjtbjnql0tf7" path="res://Fonts/Pixelart_Serif_Font_v02_by_ReffPixels/PixelSerif_16px_v02.ttf" id="1_4b6fg"]
+[ext_resource type="Script" path="res://Script/UI.gd" id="1_ph05n"]
+[ext_resource type="Texture2D" uid="uid://c0uw7k1vsyi0o" path="res://Sprite/Loot/GameItemsAnims-Sheet.png" id="3_ryuv5"]
+[ext_resource type="Texture2D" uid="uid://bux6f7dbeqill" path="res://Sprite/UI/DecayUnder.png" id="4_oguvn"]
+[ext_resource type="Texture2D" uid="uid://djsfjc4unaqcg" path="res://Sprite/UI/DecayProgress.png" id="5_xviy7"]
+[ext_resource type="Texture2D" uid="uid://bb6rq1osinf5a" path="res://Sprite/UI/PlayerHealthUpper.png" id="6_yu3pt"]
+[ext_resource type="Texture2D" uid="uid://bmasg476lwxjo" path="res://Sprite/UI/PlayerHealthProgress.png" id="7_7si35"]
+[ext_resource type="PackedScene" uid="uid://uhvlgddboqe8" path="res://Scene/Item_UI.tscn" id="8_m6s3p"]
+[ext_resource type="FontFile" uid="uid://b6q5voprl0p40" path="res://Fonts/Pixelart_Serif_Font_v02_by_ReffPixels/PixelSerif_16px_v02.otf" id="9_grnlb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n06mf"]
+atlas = ExtResource("3_ryuv5")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3kc22"]
+atlas = ExtResource("3_ryuv5")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hq6cd"]
+atlas = ExtResource("3_ryuv5")
+region = Rect2(32, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_talet"]
+atlas = ExtResource("3_ryuv5")
+region = Rect2(32, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tp2p8"]
+atlas = ExtResource("3_ryuv5")
+region = Rect2(32, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vs5ve"]
+atlas = ExtResource("3_ryuv5")
+region = Rect2(32, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6nl8r"]
+atlas = ExtResource("3_ryuv5")
+region = Rect2(32, 96, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_blmkr"]
+atlas = ExtResource("3_ryuv5")
+region = Rect2(32, 112, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4768d"]
+atlas = ExtResource("3_ryuv5")
+region = Rect2(32, 128, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5k78q"]
+atlas = ExtResource("3_ryuv5")
+region = Rect2(32, 144, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o5w8d"]
+atlas = ExtResource("3_ryuv5")
+region = Rect2(32, 160, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fv8em"]
+atlas = ExtResource("3_ryuv5")
+region = Rect2(32, 176, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qrdt2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n06mf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3kc22")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hq6cd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_talet")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tp2p8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vs5ve")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6nl8r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_blmkr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4768d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5k78q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o5w8d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fv8em")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("coins_label", "DecayProgressBar", "HealthBar", "Items")]
+script = ExtResource("1_ph05n")
+coins_label = NodePath("Panel/CoinsLabel")
+DecayProgressBar = NodePath("DecayMeter")
+HealthBar = NodePath("HealthBar")
+Items = [NodePath("Container/Item"), NodePath("Container/Item2"), NodePath("Container/Item3"), NodePath("Container/Item4"), NodePath("Container/Item5"), NodePath("Container/Item6"), NodePath("Container/Item7"), NodePath("Container/Item8"), NodePath("Container/Item9")]
+
+[node name="Panel" type="AspectRatioContainer" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -158.0
+offset_top = -77.0
+offset_right = -7.0
+offset_bottom = -11.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="CoinsLabel" type="Label" parent="Panel"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_4b6fg")
+theme_override_font_sizes/font_size = 30
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Panel"]
+texture_filter = 1
+position = Vector2(105, 31)
+scale = Vector2(2.625, 2.625)
+sprite_frames = SubResource("SpriteFrames_qrdt2")
+autoplay = "default"
+frame_progress = 0.802356
+
+[node name="DecayMeter" type="TextureProgressBar" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -134.0
+offset_top = -89.0
+offset_right = -67.0
+offset_bottom = -67.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(4, 4)
+texture_over = ExtResource("4_oguvn")
+texture_progress = ExtResource("5_xviy7")
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 105.0
+offset_bottom = 46.0
+scale = Vector2(3, 3)
+texture_over = ExtResource("6_yu3pt")
+texture_progress = ExtResource("7_7si35")
+
+[node name="Container" type="HBoxContainer" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -35.0
+offset_top = 35.0
+offset_right = 442.0
+offset_bottom = 81.0
+grow_horizontal = 0
+scale = Vector2(-1, 1)
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="Item" parent="Container" instance=ExtResource("8_m6s3p")]
+layout_mode = 2
+
+[node name="Item2" parent="Container" instance=ExtResource("8_m6s3p")]
+layout_mode = 2
+
+[node name="Item3" parent="Container" instance=ExtResource("8_m6s3p")]
+layout_mode = 2
+
+[node name="Item4" parent="Container" instance=ExtResource("8_m6s3p")]
+layout_mode = 2
+
+[node name="Item5" parent="Container" instance=ExtResource("8_m6s3p")]
+layout_mode = 2
+
+[node name="Item6" parent="Container" instance=ExtResource("8_m6s3p")]
+layout_mode = 2
+
+[node name="Item7" parent="Container" instance=ExtResource("8_m6s3p")]
+layout_mode = 2
+
+[node name="Item8" parent="Container" instance=ExtResource("8_m6s3p")]
+layout_mode = 2
+
+[node name="Item9" parent="Container" instance=ExtResource("8_m6s3p")]
+layout_mode = 2
+
+[node name="GameOver" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.165657, 0.165656, 0.165656, 0.643137)
+
+[node name="Label" type="Label" parent="GameOver"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -308.0
+offset_top = -214.0
+offset_right = 308.0
+offset_bottom = -87.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.741176, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 29
+theme_override_fonts/font = ExtResource("1_4b6fg")
+theme_override_font_sizes/font_size = 120
+text = "SKILL ISSUE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="GameOver"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -149.0
+offset_top = 14.0
+offset_right = 149.0
+offset_bottom = 92.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_grnlb")
+theme_override_font_sizes/font_size = 41
+text = "Try again? 🐋"
+
+[connection signal="button_up" from="GameOver/Button" to="." method="_on_button_button_up"]

@@ -17,6 +17,7 @@ var decay: Decay = Decay.NONE
 var flipped: bool = false
 var parrying: bool = false
 var rust_attack: bool = false
+var death_called: bool = false
 var shield = 0
 
 #region Player Properties
@@ -92,7 +93,11 @@ func Parry() -> void:
 
 func Death() -> void:
 	HurtboxCollision.disabled = true
-	update_state(State.DEATH, decay)
+	if !death_called:
+		print("DEATH")
+		death_called = true
+		World.play_audio("Player Death")
+		update_state(State.DEATH, decay)
 
 func update_state(new_state: State, new_decay: Decay) -> void:
 	if state == new_state and new_decay == decay:
@@ -100,6 +105,11 @@ func update_state(new_state: State, new_decay: Decay) -> void:
 	if (state == State.ATTACK or state == State.PARRY) and new_state != State.HIT and new_state != State.DEATH: # attacks cannot be canceled
 		return
 	state = new_state
+	if decay != new_decay:
+		if new_decay == Decay.PARTIAL:
+			World.play_audio("Rusting Partial")
+		elif new_decay == Decay.RUST:
+			World.play_audio("Rusting Fully")
 	decay = new_decay
 	
 	var animation_prefix: String
@@ -164,6 +174,7 @@ func take_damage(amount: float, decay_percentage: float, direction: int) -> floa
 	
 	update_state(State.HIT, decay)
 	World.show_damage_number(self.position, int(truedmg), true)
+	World.play_audio("Player Hurt")
 	
 	return health / max_health
 

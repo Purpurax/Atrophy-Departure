@@ -8,9 +8,15 @@ var frames: Array[int] = []
 @export var coins_label: Label
 @export var DecayProgressBar: TextureProgressBar
 @export var HealthBar: TextureProgressBar
+@export var GameOver: ColorRect
+@export var Victory: ColorRect
 @export var Items: Array[TextureRect]
 
+@onready var World: Node2D = get_tree().root.get_child(0)
+
 func _ready():
+	GameOver.visible = false
+	Victory.visible = false
 	update_coin_label("0")
 	update_health(1.0)
 	update_decay(0.0)
@@ -49,3 +55,13 @@ func equip_item(new_frame: int) -> bool:
 		if i == len(frames) - 1:
 			successful = false
 	return successful
+
+func show_game_over():
+	GameOver.visible = true
+
+func show_victory():
+	Victory.visible = true
+
+
+func _on_button_button_up():
+	World.reload()

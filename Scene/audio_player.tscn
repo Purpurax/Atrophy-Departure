@@ -1,21 +1,41 @@
-[gd_scene load_steps=8 format=3 uid="uid://bqegxofiknybn"]
+[gd_scene load_steps=16 format=3 uid="uid://bqegxofiknybn"]
 
 [ext_resource type="Script" path="res://Script/audio_player.gd" id="1_omenr"]
 [ext_resource type="AudioStream" uid="uid://b2jrxmnpex554" path="res://Sounds/Coin.wav" id="2_i8t40"]
+[ext_resource type="AudioStream" uid="uid://bt5ephg2cjpdl" path="res://Sounds/251461__joshuaempyre__arcade-music-loop.wav" id="2_t2ccc"]
 [ext_resource type="AudioStream" uid="uid://dewrwjcsh5f06" path="res://Sounds/641901__colorscrimsontears__slash-rpg-2.wav" id="3_g6tls"]
 [ext_resource type="AudioStream" uid="uid://botmyiy5n3sa7" path="res://Sounds/273566__n_audioman__jump15.wav" id="3_gs6l2"]
 [ext_resource type="AudioStream" uid="uid://b4wiv4ayxmw2k" path="res://Sounds/641902__colorscrimsontears__slash-rpg-1.wav" id="5_jdgup"]
 [ext_resource type="AudioStream" uid="uid://ca5slscevoo53" path="res://Sounds/662458__fullstacksound__treasure_chest.wav" id="6_u7hay"]
 [ext_resource type="AudioStream" uid="uid://ct2b2f2q4vuyg" path="res://Sounds/629664__stumpbutt__retro-taking-damage-sfx2.wav" id="7_ny2ak"]
+[ext_resource type="AudioStream" uid="uid://67ip0etj01u3" path="res://Sounds/695384__fmaudio__male-death-cry-1.wav" id="8_i7f55"]
+[ext_resource type="AudioStream" uid="uid://yen7ouidqn4e" path="res://Sounds/204450__ludist__soul-death.mp3" id="9_jmkda"]
+[ext_resource type="AudioStream" uid="uid://cygjdygkprpc2" path="res://Sounds/412427__florianreichelt__fail-sound-effect-accoustic-guitar.wav" id="11_xcklh"]
+[ext_resource type="AudioStream" uid="uid://cxbnanedudljr" path="res://Sounds/717499__maodin204__sad-trumpet.wav" id="12_cchqt"]
+[ext_resource type="AudioStream" uid="uid://chd81n3nouldm" path="res://Sounds/741975__victor_natas__victory-sting-3.wav" id="13_th0so"]
+[ext_resource type="AudioStream" uid="uid://bi8hbyy5cuq1r" path="res://Sounds/638636__datasoundsample__broken-metallic.wav" id="14_77lgd"]
+[ext_resource type="AudioStream" uid="uid://4ftd45nlqlv7" path="res://Sounds/40158__sagetyrtle__crash.wav" id="15_2ua7f"]
 
-[node name="AudioPlayer" type="Node2D" node_paths=PackedStringArray("Coin", "Jump", "SwordHit", "SwordHit2", "ChestOpen", "PlayerHurt")]
+[node name="AudioPlayer" type="Node2D" node_paths=PackedStringArray("Music", "Coin", "Jump", "SwordHit", "SwordHit2", "ChestOpen", "PlayerHurt", "PlayerDeath", "PlayerFall", "GameOverDefault", "GameOverTroll", "Victory", "RustingPartial", "RustingFully")]
 script = ExtResource("1_omenr")
+Music = NodePath("Music")
 Coin = NodePath("Coin Collect")
 Jump = NodePath("Jump")
 SwordHit = NodePath("Sword Hit")
 SwordHit2 = NodePath("Sword Hit2")
 ChestOpen = NodePath("Chest Open")
 PlayerHurt = NodePath("Player Hurt")
+PlayerDeath = NodePath("Player Death")
+PlayerFall = NodePath("Player Fall")
+GameOverDefault = NodePath("Game Over Default")
+GameOverTroll = NodePath("Game Over Troll")
+Victory = NodePath("Victory")
+RustingPartial = NodePath("Rusting Partial")
+RustingFully = NodePath("Rusting Fully")
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_t2ccc")
+autoplay = true
 
 [node name="Coin Collect" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_i8t40")
@@ -37,3 +57,24 @@ stream = ExtResource("6_u7hay")
 stream = ExtResource("7_ny2ak")
 
 [node name="Player Death" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_i7f55")
+
+[node name="Player Fall" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_jmkda")
+volume_db = 5.0
+
+[node name="Game Over Default" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_xcklh")
+volume_db = 10.0
+
+[node name="Game Over Troll" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_cchqt")
+
+[node name="Victory" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_th0so")
+
+[node name="Rusting Partial" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_77lgd")
+
+[node name="Rusting Fully" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_2ua7f")

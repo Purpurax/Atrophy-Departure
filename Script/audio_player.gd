@@ -1,5 +1,6 @@
 extends Node2D
 
+@export var Music: AudioStreamPlayer2D
 @export var Coin: AudioStreamPlayer2D
 @export var Jump: AudioStreamPlayer2D
 @export var SwordHit: AudioStreamPlayer2D
@@ -7,6 +8,12 @@ extends Node2D
 @export var ChestOpen: AudioStreamPlayer2D
 @export var PlayerHurt: AudioStreamPlayer2D
 @export var PlayerDeath: AudioStreamPlayer2D
+@export var PlayerFall: AudioStreamPlayer2D
+@export var GameOverDefault: AudioStreamPlayer2D
+@export var GameOverTroll: AudioStreamPlayer2D
+@export var Victory: AudioStreamPlayer2D
+@export var RustingPartial: AudioStreamPlayer2D
+@export var RustingFully: AudioStreamPlayer2D
 
 func play_audio(name: String):
 	match name:
@@ -26,5 +33,20 @@ func play_audio(name: String):
 			PlayerHurt.play()
 		"Player Death":
 			PlayerDeath.play()
+		"Player Fall":
+			PlayerFall.play()
+		"Game Over":
+			Music.stop()
+			if randf() < 0.92:
+				GameOverDefault.play()
+			else:
+				GameOverTroll.play()
+		"Victory":
+			Music.stop()
+			Victory.play()
+		"Rusting Partial":
+			RustingPartial.play()
+		"Rusting Fully":
+			RustingFully.play()
 		_:
 			print("tried to play audio withs: " + name)

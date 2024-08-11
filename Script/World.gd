@@ -30,8 +30,9 @@ func _ready():
 	UI.update_coin_label(str(coins))
 
 func _process(delta):
-	move_camera()
-	decay(delta)
+	if Player != null:
+		move_camera()
+		decay(delta)
 
 func move_camera() -> void:
 	var player_position: Vector2 = Player.get_transform().get_origin()
@@ -44,6 +45,17 @@ func move_camera() -> void:
 	
 	Camera.transform.origin = Vector2(min(max(smoothed_horizontal_movement, LEFT_CAMERA_CAP), RIGHT_CAMERA_CAP), \
 		min(max(smoothed_vertical_movement, TOP_CAMERA_CAP), BOTTOM_CAMERA_CAP))
+
+func reload():
+	get_tree().reload_current_scene()
+
+func show_game_over():
+	play_audio("Game Over")
+	UI.show_game_over()
+	
+func show_victory():
+	play_audio("Victory")
+	UI.show_victory()
 
 func decay(delta: float):
 	decay_current += delta * decay_speed
@@ -100,7 +112,9 @@ func coins_decrease_by(n: int):
 
 
 func get_player_position() -> Vector2:
-	return Player.get_transform().get_origin()
+	if Player != null:
+		return Player.get_transform().get_origin()
+	return Vector2(0,0)
 
 func damage_player(amount: float, direction: int):
 	decay(amount)
@@ -109,10 +123,9 @@ func damage_player(amount: float, direction: int):
 	
 func delete_entity(entity: Node2D):
 	if entity.name == "Player":
-		# switch to other scene or display a restart button
-		# or even just reload the level
-		print("GAME OVER")
-		queue_free()
+		play_audio("Player Fall")
+		show_game_over()
+		Player.queue_free()
 	entity.call_deferred("queue_free")
 
 
@@ -175,3 +188,9 @@ func update_player_stats(frame: int):
 
 func get_decay_current() -> float:
 	return decay_current
+
+
+
+func _on_victory_area_body_entered(body):
+	print("Victory")
+	show_victory()

@@ -48,14 +48,14 @@ func update_properties():
 			attack_speed = 5.0
 			base_damage = 40.0
 			max_health = 40
-			pause_time_after_hit = 2.0
+			pause_time_after_hit = 0.4
 		EntityType.LURP:
 			stationary = false
 			trigger_distance = 500
 			attack_speed = -1.0
 			base_damage = 30.0
 			max_health = 20
-			pause_time_after_hit = 2.0
+			pause_time_after_hit = 0.4
 
 func _physics_process(delta: float):
 	if not is_on_floor():
@@ -78,7 +78,7 @@ func _process(delta: float):
 	var player_is_in_proximity = abs(horizontal_difference) <= trigger_distance
 	if player_is_in_proximity:
 		Movement(player_position, horizontal_difference)
-		if is_on_floor() and time_elapsed >= attack_speed and attack_speed > 0:
+		if is_on_floor() and time_elapsed >= attack_speed + pause_time_after_hit and attack_speed > 0:
 			time_elapsed = 0.0
 			Attack()
 
@@ -92,7 +92,7 @@ func Movement(player_position: Vector2, horizontal_difference: int) -> void:
 		elif horizontal_difference > 0:
 			direction = 1
 		
-		if state != State.ATTACK and state != State.HIT and state != State.DEATH:
+		if state != State.ATTACK and state != State.HIT and state != State.DEATH and time_elapsed_hit >= pause_time_after_hit:
 			velocity.x = direction * SPEED
 			update_state(State.MOVE)
 			flip_player(-direction)
@@ -119,6 +119,7 @@ func Hit() -> void:
 	update_state(State.HIT)
 
 func Death() -> void:
+	World.scatter_coins_from(self.position)
 	update_state(State.DEATH)
 
 func update_state(new_state: State) -> void:

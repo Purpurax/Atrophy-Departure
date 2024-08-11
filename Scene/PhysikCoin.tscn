@@ -95,13 +95,16 @@ animations = [{
 "speed": 8.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_xcqma"]
-radius = 8.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qxc35"]
+size = Vector2(12, 12)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hmbcj"]
+radius = 8.0
 
 [node name="Coin" type="RigidBody2D"]
 collision_layer = 0
+mass = 0.02
+gravity_scale = 0.33
 script = ExtResource("1_5g6xi")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -111,7 +114,7 @@ autoplay = "default"
 frame_progress = 0.12701
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_xcqma")
+shape = SubResource("RectangleShape2D_qxc35")
 
 [node name="Area2D" type="Area2D" parent="."]
 scale = Vector2(1.625, 1.625)

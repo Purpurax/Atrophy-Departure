@@ -4,6 +4,7 @@ const LEFT_CAMERA_CAP: int = 0
 const TOP_CAMERA_CAP: int = -300
 const RIGHT_CAMERA_CAP: int = 10000
 const BOTTOM_CAMERA_CAP: int = 200
+const COIN_VELOCITY: int = 200
 
 var coins: int = 0
 var decay_max: float = 100.0
@@ -13,6 +14,8 @@ var decay_current: float = 0.0
 @export var UI: CanvasLayer
 @export var Player: CharacterBody2D
 @export var Camera: Camera2D
+
+@onready var Coin_Instance = preload("res://Scene/PhysikCoin.tscn")
 
 func _ready():
 	UI.update_coin_label(str(coins))
@@ -39,6 +42,14 @@ func decay(delta: float):
 		decay_current = decay_max
 	UI.update_decay(decay_current / decay_max)
 	Player.update_decay(decay_current / decay_max)
+
+
+func scatter_coins_from(position: Vector2):
+	for _i in range(6):
+		var coin = Coin_Instance.instantiate()
+		coin.position = position
+		coin.set_velocity(Vector2(COIN_VELOCITY * randf_range(-1.0, 1.0), -COIN_VELOCITY * randf_range(0.0, 1.0) - 150.0))
+		add_child(coin)
 
 func get_coins():
 	return coins

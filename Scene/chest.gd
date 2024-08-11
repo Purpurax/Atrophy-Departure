@@ -14,6 +14,7 @@ var player_in_proximity: bool = false
 func _ready():
 	ButtonPrompt.visible = false
 	Price.visible = false
+
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 

@@ -4,9 +4,13 @@ extends RigidBody2D
 @onready var World = get_tree().root.get_child(0)
 
 
+func _physics_process(delta):
+	self.rotation = 0
+
+func set_velocity(amount: Vector2):
+	linear_velocity = amount
+
 func _on_area_2d_body_entered(body):
-		print(body.name)
-		if (body.name == "Player"):
-			World.add_coins()
-			queue_free()
-			
+	if (body.name == "Player"):
+		World.add_coins()
+		queue_free()

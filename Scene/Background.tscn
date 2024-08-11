@@ -1,10 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://b6rk8gu3q5vyb"]
+[gd_scene load_steps=2 format=3 uid="uid://bgd64q8na7wm"]
 
-[ext_resource type="Texture2D" uid="uid://cfx7bqcq7p7p7" path="res://Sprite/Backgrounds/background_001.png" id="1_3x28s"]
+[ext_resource type="Texture2D" uid="uid://dd7ogt8eh360b" path="res://Sprite/Brown.png" id="1_77d4i"]
 
-[node name="Background" type="Node2D"]
-texture_repeat = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="TextureRect" type="TextureRect"]
 texture_filter = 1
-texture = ExtResource("1_3x28s")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_77d4i")
+stretch_mode = 1

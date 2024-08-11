@@ -79,7 +79,7 @@ func Attack() -> void:
 	update_state(State.ATTACK, decay)
 
 func Parry() -> void:
-	Hitbox.name = str(int(damage / 2))
+	Hitbox.name = str(int(damage / 1.5))
 	update_state(State.PARRY, decay)
 
 func Death() -> void:

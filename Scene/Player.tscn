@@ -1,6 +1,6 @@
 [gd_scene load_steps=43 format=3 uid="uid://dsesq20h0pl82"]
 
-[ext_resource type="Script" path="res://Script/Player.gd" id="1_fg0r2"]
+[ext_resource type="Script" path="res://Script/player.gd" id="1_fg0r2"]
 [ext_resource type="Texture2D" uid="uid://q51gdylbfhp2" path="res://Sprite/Main_Character/FREE-Knight 2D Pixel Art/Sprite_with_outline/ATTACK.png" id="1_lo85t"]
 [ext_resource type="Texture2D" uid="uid://c2mfpbkgt1ts" path="res://Sprite/Main_Character/FREE-Knight 2D Pixel Art/Sprite_with_outline/IDLE.png" id="1_ua5to"]
 [ext_resource type="Texture2D" uid="uid://c1sty6dcjqv7d" path="res://Sprite/Main_Character/FREE-Knight 2D Pixel Art/Sprite_with_outline/WALK.png" id="5_u1nbd"]

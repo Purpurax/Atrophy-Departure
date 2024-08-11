@@ -1,54 +1,54 @@
-[gd_scene load_steps=18 format=3 uid="uid://by4t1qs06oaj3"]
+[gd_scene load_steps=18 format=3 uid="uid://mt188jrqo1nk"]
 
-[ext_resource type="Script" path="res://Scene/PhysikCoin.gd" id="1_5g6xi"]
-[ext_resource type="Texture2D" uid="uid://c0uw7k1vsyi0o" path="res://Sprite/Loot/GameItemsAnims-Sheet.png" id="2_0amd0"]
+[ext_resource type="Script" path="res://Script/coin_physics.gd" id="1_obuo3"]
+[ext_resource type="Texture2D" uid="uid://c0uw7k1vsyi0o" path="res://Sprite/Loot/GameItemsAnims-Sheet.png" id="2_0l8ap"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ys4i8"]
-atlas = ExtResource("2_0amd0")
+atlas = ExtResource("2_0l8ap")
 region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bot5e"]
-atlas = ExtResource("2_0amd0")
+atlas = ExtResource("2_0l8ap")
 region = Rect2(32, 16, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k4ck1"]
-atlas = ExtResource("2_0amd0")
+atlas = ExtResource("2_0l8ap")
 region = Rect2(32, 32, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cbasw"]
-atlas = ExtResource("2_0amd0")
+atlas = ExtResource("2_0l8ap")
 region = Rect2(32, 48, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0lg5o"]
-atlas = ExtResource("2_0amd0")
+atlas = ExtResource("2_0l8ap")
 region = Rect2(32, 64, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rpfb2"]
-atlas = ExtResource("2_0amd0")
+atlas = ExtResource("2_0l8ap")
 region = Rect2(32, 80, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iyark"]
-atlas = ExtResource("2_0amd0")
+atlas = ExtResource("2_0l8ap")
 region = Rect2(32, 96, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xa0ut"]
-atlas = ExtResource("2_0amd0")
+atlas = ExtResource("2_0l8ap")
 region = Rect2(32, 112, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r1thk"]
-atlas = ExtResource("2_0amd0")
+atlas = ExtResource("2_0l8ap")
 region = Rect2(32, 128, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uqowd"]
-atlas = ExtResource("2_0amd0")
+atlas = ExtResource("2_0l8ap")
 region = Rect2(32, 144, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jnsaf"]
-atlas = ExtResource("2_0amd0")
+atlas = ExtResource("2_0l8ap")
 region = Rect2(32, 160, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_enby6"]
-atlas = ExtResource("2_0amd0")
+atlas = ExtResource("2_0l8ap")
 region = Rect2(32, 176, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_uvwun"]
@@ -105,7 +105,7 @@ radius = 8.0
 collision_layer = 0
 mass = 0.02
 gravity_scale = 0.33
-script = ExtResource("1_5g6xi")
+script = ExtResource("1_obuo3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1

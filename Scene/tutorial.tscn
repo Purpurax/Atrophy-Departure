@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dks64m37h3pve"]
+[gd_scene load_steps=4 format=3 uid="uid://dvwa07k4i8ay2"]
 
 [ext_resource type="Script" path="res://Tutorial Popup.gd" id="1_ekhio"]
 [ext_resource type="FontFile" uid="uid://xjtbjnql0tf7" path="res://Fonts/Pixelart_Serif_Font_v02_by_ReffPixels/PixelSerif_16px_v02.ttf" id="2_8rgmy"]

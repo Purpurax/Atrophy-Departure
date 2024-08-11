@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cgta2a8elkmjh"]
+[gd_scene load_steps=18 format=3 uid="uid://cmrs5ncm1c83d"]
 
 [ext_resource type="Script" path="res://Script/Enemy.gd" id="1_vfx6n"]
 [ext_resource type="Texture2D" uid="uid://co4j4catfwqs3" path="res://Sprite/Enemies/Forest_Monsters_FREE/Mushroom/Mushroom with VFX/Mushroom-Idle.png" id="1_wd85i"]
@@ -467,14 +467,14 @@ Sprite = NodePath("Sprite2D")
 Hitbox = NodePath("Hitbox")
 Hurtbox = NodePath("Hurtbox")
 
-[node name="WorldCollision" type="CollisionShape2D" parent="."]
-position = Vector2(0, 2)
-shape = SubResource("CapsuleShape2D_3u70x")
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -16)
 texture = ExtResource("1_wd85i")
 hframes = 7
+
+[node name="WorldCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("CapsuleShape2D_3u70x")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

@@ -189,9 +189,11 @@ func _on_hitbox_area_exited(area):
 func _on_hurtbox_area_entered(area):
 	if !death:
 		var damage_taken: int = int(str(area.name))
-		health -= damage_taken
-		if health <= 0:
-			death = true
-			Hitbox.queue_free()
-			Hurtbox.queue_free()
-		Hit()
+		if damage_taken != null and damage_taken != 0:
+			health -= damage_taken
+			if health <= 0:
+				death = true
+				Hitbox.queue_free()
+				Hurtbox.queue_free()
+			World.show_damage_number(self.position, damage_taken)
+			Hit()

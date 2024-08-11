@@ -146,6 +146,7 @@ func take_damage(amount: float, decay_percentage: float, direction: int) -> floa
 	death = health <= 0
 	
 	update_state(State.HIT, decay)
+	World.show_damage_number(self.position, int(truedmg), true)
 	
 	return health / max_health
 

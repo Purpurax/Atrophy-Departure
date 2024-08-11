@@ -1,7 +1,6 @@
-[gd_scene load_steps=19 format=3 uid="uid://cnqg1ogskwm0t"]
+[gd_scene load_steps=18 format=3 uid="uid://dtb1apdmccv8e"]
 
 [ext_resource type="Script" path="res://Script/Enemy.gd" id="1_0ayni"]
-[ext_resource type="Texture2D" uid="uid://co4j4catfwqs3" path="res://Sprite/Enemies/Forest_Monsters_FREE/Mushroom/Mushroom with VFX/Mushroom-Idle.png" id="2_idyei"]
 [ext_resource type="Texture2D" uid="uid://of052sioyhq" path="res://Sprite/Enemies/Forest_Monsters_FREE/Mushroom/Mushroom with VFX/Mushroom-Attack.png" id="3_eo4ya"]
 [ext_resource type="Texture2D" uid="uid://e0o8j2ba3ydp" path="res://Sprite/Enemies/Goblin Scout/goblin scout - silhouette all animations-death 1.png" id="4_fa7jr"]
 [ext_resource type="Texture2D" uid="uid://3kwcc17f8rky" path="res://Sprite/Enemies/Goblin Scout/goblin scout - silhouette all animations-hit.png" id="5_iroyk"]
@@ -304,9 +303,6 @@ tracks/3/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_flw2l"]
-size = Vector2(18.5, 32.5)
-
 [sub_resource type="Animation" id="Animation_cauiy"]
 length = 0.001
 tracks/0/type = "value"
@@ -319,7 +315,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_idyei")]
+"values": [ExtResource("6_3sbp4")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -331,7 +327,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [7]
+"values": [8]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -356,42 +352,6 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Hitbox/CollisionShape2D:shape")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [SubResource("RectangleShape2D_flw2l")]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Hitbox/CollisionShape2D:rotation")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Hitbox/CollisionShape2D:position")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-0.25, -0.25)]
 }
 
 [sub_resource type="Animation" id="Animation_vo5hl"]
@@ -457,6 +417,10 @@ _data = {
 "Run": SubResource("Animation_vo5hl")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xvfhx"]
+radius = 6.58333
+height = 19.3333
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jvhhq"]
 radius = 5.33333
 height = 17.3333
@@ -477,8 +441,8 @@ position = Vector2(0, 4.477)
 shape = SubResource("CapsuleShape2D_3u70x")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_idyei")
-hframes = 7
+texture = ExtResource("6_3sbp4")
+hframes = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -491,8 +455,8 @@ collision_layer = 16
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(-0.25, -0.25)
-shape = SubResource("RectangleShape2D_flw2l")
+position = Vector2(0, 4.33333)
+shape = SubResource("CapsuleShape2D_xvfhx")
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 32

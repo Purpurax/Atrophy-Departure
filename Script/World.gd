@@ -5,6 +5,8 @@ const TOP_CAMERA_CAP: int = -300
 const RIGHT_CAMERA_CAP: int = 10000
 const BOTTOM_CAMERA_CAP: int = 200
 const COIN_VELOCITY: int = 200
+const DMG_VELOCITY: int = 100
+const DMG_VELOCITY_VERTICAL: int = -50
 
 var coins: int = 0
 var decay_max: float = 150.0
@@ -54,11 +56,20 @@ func scatter_coins_from(position: Vector2):
 		coin.position = position
 		coin.set_velocity(Vector2(COIN_VELOCITY * randf_range(-1.0, 1.0), -COIN_VELOCITY * randf_range(0.0, 1.0) - 150.0))
 		add_child(coin)
-		
-		var dmg_number = Damage_Number_Instance.instantiate()
-		dmg_number.position = position
-		dmg_number.set_velocity(Vector2(COIN_VELOCITY * randf_range(-1.0, 1.0), -COIN_VELOCITY * randf_range(0.0, 1.0) - 150.0))
-		add_child(dmg_number)
+
+func show_damage_number(position: Vector2, damage_amount: int, red: bool = false):
+	var dmg_number = Damage_Number_Instance.instantiate()
+	if randi():
+		dmg_number.position = position + Vector2(10.0, -20.0)
+		dmg_number.set_velocity(Vector2(DMG_VELOCITY, DMG_VELOCITY_VERTICAL))
+	else:
+		dmg_number.position = position + Vector2(-10.0, -20.0)
+		dmg_number.set_velocity(Vector2(-DMG_VELOCITY, DMG_VELOCITY_VERTICAL))
+	
+	if red:
+		dmg_number.set_font_color_red()
+	dmg_number.set_damage(damage_amount)
+	add_child(dmg_number)
 
 func get_coins():
 	return coins

@@ -1,38 +1,28 @@
 [gd_scene load_steps=15 format=3 uid="uid://dw60fftogfr60"]
 
-[ext_resource type="PackedScene" uid="uid://dsesq20h0pl82" path="res://Scene/Player.tscn" id="1_k76df"]
+[ext_resource type="PackedScene" uid="uid://biiwt5o120pby" path="res://Scene/Player.tscn" id="1_k76df"]
 [ext_resource type="Script" path="res://Script/World.gd" id="1_o026n"]
 [ext_resource type="PackedScene" uid="uid://doc6d7rxr6law" path="res://Scene/tile_map.tscn" id="4_6f6ma"]
 [ext_resource type="PackedScene" uid="uid://d0unxj4wqs361" path="res://Scene/Coin.tscn" id="4_nuaeg"]
-[ext_resource type="PackedScene" uid="uid://cmrs5ncm1c83d" path="res://Scene/Enemy_Mushroom.tscn" id="6_2rsi8"]
-[ext_resource type="PackedScene" uid="uid://cwy5u5v3v51ck" path="res://Scene/UI.tscn" id="6_37pc7"]
+[ext_resource type="PackedScene" uid="uid://cgta2a8elkmjh" path="res://Scene/Enemy_Mushroom.tscn" id="6_2rsi8"]
+[ext_resource type="PackedScene" uid="uid://cj8tmuccntbdb" path="res://Scene/UI.tscn" id="6_37pc7"]
 [ext_resource type="PackedScene" uid="uid://uix2mi250lyk" path="res://Scene/chest.tscn" id="8_0g2f7"]
-[ext_resource type="PackedScene" uid="uid://cgcem0py8tntq" path="res://Scene/chest_inverted.tscn" id="9_n2pnf"]
-[ext_resource type="PackedScene" path="res://Scene/tutorial.tscn" id="9_vkaoh"]
-[ext_resource type="PackedScene" path="res://Scene/FillerBackground.tscn" id="10_seocx"]
+[ext_resource type="PackedScene" uid="uid://dmajyvditdk1x" path="res://Scene/chest_inverted.tscn" id="9_n2pnf"]
+[ext_resource type="PackedScene" uid="uid://dks64m37h3pve" path="res://Scene/tutorial.tscn" id="9_vkaoh"]
+[ext_resource type="PackedScene" uid="uid://bgd64q8na7wm" path="res://Scene/FillerBackground.tscn" id="10_seocx"]
 [ext_resource type="PackedScene" uid="uid://ra1qdgtv5bup" path="res://Scene/DeathBox.tscn" id="11_n580b"]
-<<<<<<< Updated upstream
 [ext_resource type="PackedScene" uid="uid://n8etcvxqsdnj" path="res://Scene/tutorial2.tscn" id="12_l2ck1"]
 [ext_resource type="PackedScene" uid="uid://mt188jrqo1nk" path="res://Scene/PhysikCoin.tscn" id="13_oyy2y"]
 [ext_resource type="PackedScene" uid="uid://cftmpc78cv60u" path="res://Scene/Enemy_Lurp.tscn" id="14_07do1"]
-=======
-[ext_resource type="PackedScene" path="res://Scene/tutorial2.tscn" id="12_l2ck1"]
-[ext_resource type="PackedScene" uid="uid://dtb1apdmccv8e" path="res://Scene/Enemy_Lurp.tscn" id="14_07do1"]
-[ext_resource type="PackedScene" uid="uid://cmi77sn8qe7bb" path="res://Scene/audio_player.tscn" id="14_cvk81"]
->>>>>>> Stashed changes
 
-[node name="World" type="Node2D" node_paths=PackedStringArray("UI", "Player", "Camera", "AudioPlayer")]
+[node name="World" type="Node2D" node_paths=PackedStringArray("UI", "Player", "Camera")]
 script = ExtResource("1_o026n")
 UI = NodePath("UI")
 Player = NodePath("Player")
 Camera = NodePath("Camera")
-AudioPlayer = NodePath("Camera/AudioPlayer")
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(-4, 94)
-
-[node name="AudioPlayer" parent="Camera" instance=ExtResource("14_cvk81")]
-position = Vector2(4, -94)
 
 [node name="Environment" type="Node2D" parent="."]
 
@@ -55,50 +45,59 @@ position = Vector2(-96, -305)
 [node name="Coin5" parent="Environment" instance=ExtResource("4_nuaeg")]
 position = Vector2(287, -16)
 
-[node name="Chest" parent="Environment" instance=ExtResource("8_0g2f7")]
+[node name="Entities" type="Node2D" parent="."]
+
+[node name="EnemyMushroom" parent="Entities" instance=ExtResource("6_2rsi8")]
+position = Vector2(806, 30)
+
+[node name="Player" parent="." instance=ExtResource("1_k76df")]
+
+[node name="UI" parent="." instance=ExtResource("6_37pc7")]
+
+[node name="Chest" parent="." instance=ExtResource("8_0g2f7")]
 position = Vector2(9.44, -288)
 scale = Vector2(2.97, 2.97)
 
-[node name="Coin6" parent="Environment" instance=ExtResource("4_nuaeg")]
+[node name="Coin" parent="." instance=ExtResource("4_nuaeg")]
 position = Vector2(543, -14)
 
-[node name="Coin7" parent="Environment" instance=ExtResource("4_nuaeg")]
+[node name="Coin2" parent="." instance=ExtResource("4_nuaeg")]
 position = Vector2(874, -44)
 
-[node name="Coin8" parent="Environment" instance=ExtResource("4_nuaeg")]
+[node name="Coin3" parent="." instance=ExtResource("4_nuaeg")]
 position = Vector2(964, -102)
 
-[node name="Coin9" parent="Environment" instance=ExtResource("4_nuaeg")]
+[node name="Coin4" parent="." instance=ExtResource("4_nuaeg")]
 position = Vector2(1062, -40)
 
-[node name="Coin10" parent="Environment" instance=ExtResource("4_nuaeg")]
+[node name="Coin5" parent="." instance=ExtResource("4_nuaeg")]
 position = Vector2(1393, -107)
 
-[node name="Coin11" parent="Environment" instance=ExtResource("4_nuaeg")]
+[node name="Coin6" parent="." instance=ExtResource("4_nuaeg")]
 position = Vector2(1779.69, 103)
 
-[node name="Coin12" parent="Environment" instance=ExtResource("4_nuaeg")]
+[node name="Coin7" parent="." instance=ExtResource("4_nuaeg")]
 position = Vector2(1779.69, 223)
 
-[node name="Coin13" parent="Environment" instance=ExtResource("4_nuaeg")]
+[node name="Coin8" parent="." instance=ExtResource("4_nuaeg")]
 position = Vector2(1779.69, 355)
 
-[node name="Chest2" parent="Environment" instance=ExtResource("8_0g2f7")]
+[node name="Chest2" parent="." instance=ExtResource("8_0g2f7")]
 position = Vector2(2688, 203)
 
-[node name="EnemyMushroom" parent="Environment" instance=ExtResource("6_2rsi8")]
+[node name="EnemyMushroom" parent="." instance=ExtResource("6_2rsi8")]
 position = Vector2(1976, 471.155)
 
-[node name="EnemyMushroom2" parent="Environment" instance=ExtResource("6_2rsi8")]
+[node name="EnemyMushroom2" parent="." instance=ExtResource("6_2rsi8")]
 position = Vector2(2233, 471.03)
 
-[node name="Tutorial" parent="Environment" instance=ExtResource("9_vkaoh")]
+[node name="Tutorial" parent="." instance=ExtResource("9_vkaoh")]
 position = Vector2(26, -68)
 
-[node name="Chest3" parent="Environment" instance=ExtResource("9_n2pnf")]
+[node name="Chest3" parent="." instance=ExtResource("9_n2pnf")]
 position = Vector2(3518, -373)
 
-[node name="TextureRect" parent="Environment" instance=ExtResource("10_seocx")]
+[node name="TextureRect" parent="." instance=ExtResource("10_seocx")]
 show_behind_parent = true
 light_mask = 524288
 visibility_layer = 524288
@@ -112,112 +111,104 @@ offset_bottom = 634.0
 grow_horizontal = 1
 grow_vertical = 1
 
-[node name="DeathBox" parent="Environment" node_paths=PackedStringArray("World") instance=ExtResource("11_n580b")]
+[node name="DeathBox" parent="." node_paths=PackedStringArray("World") instance=ExtResource("11_n580b")]
 position = Vector2(653.35, 241.56)
 scale = Vector2(2.885, 1)
-World = NodePath("../..")
+World = NodePath("..")
 
-[node name="Coin14" parent="Environment" instance=ExtResource("4_nuaeg")]
+[node name="Coin9" parent="." instance=ExtResource("4_nuaeg")]
 position = Vector2(2233, -186)
 
-[node name="Coin15" parent="Environment" instance=ExtResource("4_nuaeg")]
+[node name="Coin10" parent="." instance=ExtResource("4_nuaeg")]
 position = Vector2(2393, -187)
 
-[node name="Coin16" parent="Environment" instance=ExtResource("4_nuaeg")]
+[node name="Coin11" parent="." instance=ExtResource("4_nuaeg")]
 position = Vector2(2480, 291)
 
-[node name="Coin17" parent="Environment" instance=ExtResource("4_nuaeg")]
+[node name="Coin12" parent="." instance=ExtResource("4_nuaeg")]
 position = Vector2(2388, 373)
 
-[node name="Coin18" parent="Environment" instance=ExtResource("4_nuaeg")]
+[node name="Coin13" parent="." instance=ExtResource("4_nuaeg")]
 position = Vector2(2602, 317)
 
-[node name="Coin19" parent="Environment" instance=ExtResource("4_nuaeg")]
+[node name="Coin14" parent="." instance=ExtResource("4_nuaeg")]
 position = Vector2(3281, -16)
 
-[node name="Coin20" parent="Environment" instance=ExtResource("4_nuaeg")]
+[node name="Coin15" parent="." instance=ExtResource("4_nuaeg")]
 position = Vector2(3279, -113)
 
-[node name="Coin21" parent="Environment" instance=ExtResource("4_nuaeg")]
+[node name="Coin16" parent="." instance=ExtResource("4_nuaeg")]
 position = Vector2(4729, 190)
 
-[node name="Coin22" parent="Environment" instance=ExtResource("4_nuaeg")]
+[node name="Coin17" parent="." instance=ExtResource("4_nuaeg")]
 position = Vector2(4664, -127)
 
-[node name="Coin23" parent="Environment" instance=ExtResource("4_nuaeg")]
+[node name="Coin18" parent="." instance=ExtResource("4_nuaeg")]
 position = Vector2(4406, -126)
 
-[node name="Coin24" parent="Environment" instance=ExtResource("4_nuaeg")]
+[node name="Coin19" parent="." instance=ExtResource("4_nuaeg")]
 position = Vector2(3834, -272)
 
-[node name="Coin25" parent="Environment" instance=ExtResource("4_nuaeg")]
+[node name="Coin20" parent="." instance=ExtResource("4_nuaeg")]
 position = Vector2(4851, 3)
 
-[node name="Coin26" parent="Environment" instance=ExtResource("4_nuaeg")]
+[node name="Coin21" parent="." instance=ExtResource("4_nuaeg")]
 position = Vector2(3922, -196)
 
-[node name="Coin27" parent="Environment" instance=ExtResource("4_nuaeg")]
+[node name="Coin22" parent="." instance=ExtResource("4_nuaeg")]
 position = Vector2(3726, -299)
 
-[node name="Coin28" parent="Environment" instance=ExtResource("4_nuaeg")]
+[node name="Coin23" parent="." instance=ExtResource("4_nuaeg")]
 position = Vector2(4396, 252)
 
-[node name="Tutorial2" parent="Environment" instance=ExtResource("12_l2ck1")]
+[node name="Tutorial2" parent="." instance=ExtResource("12_l2ck1")]
 position = Vector2(1500, -129)
 
-[node name="DeathBox2" parent="Environment" node_paths=PackedStringArray("World") instance=ExtResource("11_n580b")]
+[node name="DeathBox2" parent="." node_paths=PackedStringArray("World") instance=ExtResource("11_n580b")]
 position = Vector2(2351.99, 504)
 scale = Vector2(1.415, 0.705)
-World = NodePath("../..")
+World = NodePath("..")
 
-[node name="DeathBox3" parent="Environment" node_paths=PackedStringArray("World") instance=ExtResource("11_n580b")]
+[node name="DeathBox3" parent="." node_paths=PackedStringArray("World") instance=ExtResource("11_n580b")]
 position = Vector2(4631, 499)
-World = NodePath("../..")
+World = NodePath("..")
 
-[node name="EnemyMushroom3" parent="Environment" instance=ExtResource("6_2rsi8")]
+[node name="EnemyMushroom3" parent="." instance=ExtResource("6_2rsi8")]
 position = Vector2(5844, 287)
 
-[node name="DeathBox4" parent="Environment" node_paths=PackedStringArray("World") instance=ExtResource("11_n580b")]
+[node name="DeathBox4" parent="." node_paths=PackedStringArray("World") instance=ExtResource("11_n580b")]
 position = Vector2(6950.73, 417)
 scale = Vector2(1.78, 1)
-World = NodePath("../..")
+World = NodePath("..")
 
-[node name="DeathBox5" parent="Environment" node_paths=PackedStringArray("World") instance=ExtResource("11_n580b")]
+[node name="DeathBox5" parent="." node_paths=PackedStringArray("World") instance=ExtResource("11_n580b")]
 position = Vector2(5799.83, 382.635)
 scale = Vector2(5.97, 1)
-World = NodePath("../..")
+World = NodePath("..")
 
-[node name="Coin29" parent="Environment" instance=ExtResource("4_nuaeg")]
+[node name="Coin24" parent="." instance=ExtResource("4_nuaeg")]
 position = Vector2(6000, 198)
 
-[node name="Coin30" parent="Environment" instance=ExtResource("4_nuaeg")]
+[node name="Coin25" parent="." instance=ExtResource("4_nuaeg")]
 position = Vector2(6146, 198)
 
-[node name="Coin31" parent="Environment" instance=ExtResource("4_nuaeg")]
+[node name="Coin26" parent="." instance=ExtResource("4_nuaeg")]
 position = Vector2(6076, 153)
 
-[node name="Coin32" parent="Environment" instance=ExtResource("4_nuaeg")]
+[node name="Coin27" parent="." instance=ExtResource("4_nuaeg")]
 position = Vector2(6322, 204)
 
-[node name="Coin33" parent="Environment" instance=ExtResource("4_nuaeg")]
+[node name="Coin28" parent="." instance=ExtResource("4_nuaeg")]
 position = Vector2(6407, 138)
 
-[node name="Coin34" parent="Environment" instance=ExtResource("4_nuaeg")]
+[node name="Coin29" parent="." instance=ExtResource("4_nuaeg")]
 position = Vector2(6481, 213)
 
-[node name="Chest4" parent="Environment" instance=ExtResource("9_n2pnf")]
+[node name="Chest4" parent="." instance=ExtResource("9_n2pnf")]
 position = Vector2(7565, -105)
 
-[node name="EnemyLurp" parent="Environment" instance=ExtResource("14_07do1")]
+[node name="Coin30" parent="." instance=ExtResource("13_oyy2y")]
+position = Vector2(351, -113)
+
+[node name="EnemyLurp" parent="." instance=ExtResource("14_07do1")]
 position = Vector2(692, 16)
-rotation = 3.14159
-scale = Vector2(3, -3)
-
-[node name="Entities" type="Node2D" parent="."]
-
-[node name="EnemyMushroom" parent="Entities" instance=ExtResource("6_2rsi8")]
-position = Vector2(806, 30)
-
-[node name="Player" parent="." instance=ExtResource("1_k76df")]
-
-[node name="UI" parent="." instance=ExtResource("6_37pc7")]

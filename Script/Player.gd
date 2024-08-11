@@ -17,6 +17,8 @@ var flipped: bool = false
 
 @export var AnimPlayer: AnimationPlayer
 @export var Sprite: Sprite2D
+@export var Hitbox: Area2D
+@export var HitboxCollision: CollisionShape2D
 
 func _ready() -> void:
 	update_state(state, decay)
@@ -52,7 +54,8 @@ func Movement() -> void:
 	move_and_slide()
 
 func Attack() -> void:
-	# calculate damage depending on Decay
+	var damage: float = 9.5
+	Hitbox.name = str(int(damage))
 	update_state(State.ATTACK, decay)
 
 func Parry() -> void:
@@ -83,7 +86,7 @@ func update_state(new_state: State, new_decay: Decay) -> void:
 			AnimPlayer.stop()
 			AnimPlayer.play(animation_prefix + "Walk")
 		State.ATTACK:
-			AnimPlayer.stop()
+			#AnimPlayer.stop()
 			AnimPlayer.play(animation_prefix + "Attack")
 		State.PARRY:
 			AnimPlayer.stop()
@@ -116,3 +119,7 @@ func take_damage(amount: float, decay_percentage: float):
 func _anim_end() -> void:
 	state = State.MOVE
 	update_state(State.IDLE, decay)
+
+
+func _on_hitbox_area_entered(area):
+	HitboxCollision.disabled = true

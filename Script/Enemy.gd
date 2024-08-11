@@ -130,3 +130,7 @@ func _on_hitbox_area_entered(area):
 
 func _on_hitbox_area_exited(area):
 	on_player = false
+
+
+func _on_hurtbox_area_entered(area):
+	print(area.name)

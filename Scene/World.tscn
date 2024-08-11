@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://btm5qwcj1m3li" path="res://Scene/Coin.tscn" id="4_nuaeg"]
 [ext_resource type="PackedScene" uid="uid://cmrs5ncm1c83d" path="res://Scene/Enemy_Mushroom.tscn" id="6_2rsi8"]
 [ext_resource type="PackedScene" uid="uid://cwy5u5v3v51ck" path="res://Scene/UI.tscn" id="6_37pc7"]
-[ext_resource type="PackedScene" path="res://Scene/chest.tscn" id="8_0g2f7"]
+[ext_resource type="PackedScene" uid="uid://uix2mi250lyk" path="res://Scene/chest.tscn" id="8_0g2f7"]
 
 [node name="World" type="Node2D" node_paths=PackedStringArray("UI", "Player", "Camera")]
 script = ExtResource("1_o026n")

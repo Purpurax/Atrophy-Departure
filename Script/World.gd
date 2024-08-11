@@ -2,14 +2,14 @@ extends Node2D
 
 const LEFT_CAMERA_CAP: int = 0
 const TOP_CAMERA_CAP: int = -300
-const RIGHT_CAMERA_CAP: int = 20000
+const RIGHT_CAMERA_CAP: int = 16500
 const BOTTOM_CAMERA_CAP: int = 300
 const COIN_VELOCITY: int = 200
 const DMG_VELOCITY: int = 100
 const DMG_VELOCITY_VERTICAL: int = -50
 
 var coins: int = 0
-var decay_max: float = 150.0
+var decay_max: float = 175.0
 var decay_speed: float = 1.0
 var decay_current: float = 0.0
 
@@ -139,7 +139,7 @@ func generate_item_frame() -> int:
 	if len(possible_frames) == 0:
 		return -1
 	
-	return 17 #possible_frames.pick_random()
+	return possible_frames.pick_random()
 
 func equip_item(frame: int) -> bool:
 	var successful = UI.equip_item(frame)

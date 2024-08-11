@@ -138,7 +138,9 @@ func take_damage(amount: float, decay_percentage: float, direction: int) -> floa
 	flip_player(-direction)
 	velocity.y = HIT_VELOCITY_VERTICAL
 	
-	health -= int(amount)
+	var truedmg = amount * (decay_percentage * 30)
+	
+	health -= int(truedmg)
 	death = health <= 0
 	
 	update_state(State.HIT, decay)

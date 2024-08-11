@@ -46,14 +46,14 @@ func update_properties():
 			stationary = false
 			trigger_distance = 500
 			attack_speed = 5.0
-			base_damage = 40.0
+			base_damage = 3.0
 			max_health = 40
 			pause_time_after_hit = 0.4
 		EntityType.LURP:
 			stationary = false
 			trigger_distance = 500
 			attack_speed = -1.0
-			base_damage = 30.0
+			base_damage = 2.0
 			max_health = 20
 			pause_time_after_hit = 0.4
 

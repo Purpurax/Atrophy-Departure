@@ -7,7 +7,7 @@ const BOTTOM_CAMERA_CAP: int = 200
 const COIN_VELOCITY: int = 200
 
 var coins: int = 0
-var decay_max: float = 100.0
+var decay_max: float = 150.0
 var decay_speed: float = 1.0
 var decay_current: float = 0.0
 

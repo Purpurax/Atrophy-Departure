@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://ra1qdgtv5bup" path="res://Scene/DeathBox.tscn" id="11_n580b"]
 [ext_resource type="PackedScene" uid="uid://n8etcvxqsdnj" path="res://Scene/tutorial2.tscn" id="12_l2ck1"]
 [ext_resource type="PackedScene" uid="uid://mt188jrqo1nk" path="res://Scene/PhysikCoin.tscn" id="13_oyy2y"]
-[ext_resource type="PackedScene" path="res://Scene/Enemy_Lurp.tscn" id="14_07do1"]
+[ext_resource type="PackedScene" uid="uid://cftmpc78cv60u" path="res://Scene/Enemy_Lurp.tscn" id="14_07do1"]
 
 [node name="World" type="Node2D" node_paths=PackedStringArray("UI", "Player", "Camera")]
 script = ExtResource("1_o026n")

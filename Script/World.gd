@@ -117,24 +117,30 @@ func delete_entity(entity: Node2D):
 
 
 func generate_item_frame() -> int:
-	#match randi_range(0, 7):
-		#0: return 3 # Item Increases Damage
-		#1: return 106 # Item Increases max_health
-		#2: return 35 # Item Increases Damage with Coins
-		#3: return 152 # Item Restores Decay when picking up Coins
-		#4: return 196 # Item increases Speed
-		#5: return 191 # Item slows decay
-		#6: return 65 # Items Heals player with coins
-		#7: return 49 # Item decreases damage taken
-		#_:
-			#print("random number is not in range")
-			#return 22
-	return 49
+	var have_frames: Array[int] = UI.get_item_frames()
+	var all_frames: Array[int] = [
+		3, # Item Increases Damage
+		106, # Item Increases max_health
+		35, # Item Increases Damage with Coins
+		152, # Item Restores Decay when picking up Coins
+		196, # Item increases Speed
+		191, # Item slows decay
+		65, # Items Heals player with coins
+		49, # Item decreases damage taken
+	]
+	var possible_frames: Array[int] = []
+	for frame in all_frames:
+		if !(frame in have_frames):
+			possible_frames.append(frame)
+	
+	if len(possible_frames) == 0:
+		return -1
+	
+	return possible_frames.pick_random()
 
 func equip_item(frame: int) -> bool:
 	var successful = UI.equip_item(frame)
-	# TODO update Player stats
-	update_player_stats(frame)
+	if successful: update_player_stats(frame)
 	return successful
 
 func update_player_stats(frame: int):

@@ -38,11 +38,8 @@ func open_chest():
 	open = true
 	
 	var frame = World.generate_item_frame()
-	# display frame over chest ?? when, for how long
-	
-	var player_can_take_item = World.equip_item(frame)
-	if !player_can_take_item:
-		print("Player is full")
+	if frame == -1 or !World.equip_item(frame):
+		World.scatter_coins_from(self.position, 12)
 
 
 func _on_area_2d_body_entered(body):

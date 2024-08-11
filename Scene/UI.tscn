@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://djsfjc4unaqcg" path="res://Sprite/UI/DecayProgress.png" id="5_xviy7"]
 [ext_resource type="Texture2D" uid="uid://bb6rq1osinf5a" path="res://Sprite/UI/PlayerHealthUpper.png" id="6_yu3pt"]
 [ext_resource type="Texture2D" uid="uid://bmasg476lwxjo" path="res://Sprite/UI/PlayerHealthProgress.png" id="7_7si35"]
-[ext_resource type="PackedScene" uid="uid://uhvlgddboqe8" path="res://Scene/Item_UI.tscn" id="8_m6s3p"]
+[ext_resource type="PackedScene" uid="uid://blxomvb1phsym" path="res://Scene/Item_UI.tscn" id="8_m6s3p"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n06mf"]
 atlas = ExtResource("3_ryuv5")
@@ -106,7 +106,7 @@ script = ExtResource("1_ph05n")
 coins_label = NodePath("Panel/CoinsLabel")
 DecayProgressBar = NodePath("DecayMeter")
 HealthBar = NodePath("HealthBar")
-Items = [NodePath("Container/Item"), NodePath("Container/Item2"), NodePath("Container/Item3"), NodePath("Container/Item4"), NodePath("Container/Item5"), NodePath("Container/Item6"), NodePath("Container/Item7")]
+Items = [NodePath("Container/Item"), NodePath("Container/Item2"), NodePath("Container/Item3"), NodePath("Container/Item4"), NodePath("Container/Item5"), NodePath("Container/Item6"), NodePath("Container/Item7"), NodePath("Container/Item8"), NodePath("Container/Item9")]
 
 [node name="Panel" type="AspectRatioContainer" parent="."]
 anchors_preset = 3
@@ -193,4 +193,10 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Item7" parent="Container" instance=ExtResource("8_m6s3p")]
+layout_mode = 2
+
+[node name="Item8" parent="Container" instance=ExtResource("8_m6s3p")]
+layout_mode = 2
+
+[node name="Item9" parent="Container" instance=ExtResource("8_m6s3p")]
 layout_mode = 2

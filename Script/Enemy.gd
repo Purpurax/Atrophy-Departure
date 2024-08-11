@@ -4,6 +4,7 @@ extends CharacterBody2D
 const SPEED = 100.0
 const JUMP_VELOCITY = -800.0
 const HIT_VELOCITY = 1200.0
+const HIT_VELOCITY_VERTICAL = -200.0
 const FAST_FALL_FACTOR = 4
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -22,15 +23,17 @@ var trigger_distance: int
 var attack_speed: float
 var base_damage: float
 var max_health: int
+var pause_time_after_hit: float
 #endregion
 
-enum EntityType {MUSHROOM}
+enum EntityType {MUSHROOM, LURP}
 @export var entity_type: EntityType
-@export var World: Node2D
 @export var AnimPlayer: AnimationPlayer
 @export var Sprite: Sprite2D
 @export var Hitbox: Area2D
 @export var Hurtbox: Area2D
+
+@onready var World: Node2D = get_tree().root.get_child(0)
 
 func _ready() -> void:
 	update_state(State.IDLE)
@@ -45,6 +48,14 @@ func update_properties():
 			attack_speed = 5.0
 			base_damage = 40.0
 			max_health = 40
+			pause_time_after_hit = 2.0
+		EntityType.LURP:
+			stationary = false
+			trigger_distance = 500
+			attack_speed = -1.0
+			base_damage = 30.0
+			max_health = 20
+			pause_time_after_hit = 2.0
 
 func _physics_process(delta: float):
 	if not is_on_floor():
@@ -67,7 +78,7 @@ func _process(delta: float):
 	var player_is_in_proximity = abs(horizontal_difference) <= trigger_distance
 	if player_is_in_proximity:
 		Movement(player_position, horizontal_difference)
-		if is_on_floor() and time_elapsed >= attack_speed:
+		if is_on_floor() and time_elapsed >= attack_speed and attack_speed > 0:
 			time_elapsed = 0.0
 			Attack()
 
@@ -100,9 +111,10 @@ func Hit() -> void:
 	var horizontal_difference: int = player_position.x - self.get_transform().get_origin().x
 	
 	if horizontal_difference < 0:
-		velocity.x += HIT_VELOCITY
+		velocity.x = HIT_VELOCITY
 	else:
-		velocity.x -= HIT_VELOCITY
+		velocity.x = -HIT_VELOCITY
+	velocity.y = HIT_VELOCITY_VERTICAL
 	
 	update_state(State.HIT)
 

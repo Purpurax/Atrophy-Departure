@@ -5,6 +5,7 @@ var speed = 400.0
 const JUMP_VELOCITY = -800.0
 const HIT_VELOCITY = 1200.0
 const HIT_VELOCITY_VERTICAL = -500.0
+const PARRY_VELOCITY = 700.0
 const FAST_FALL_FACTOR = 4
 
 enum State {IDLE, MOVE, ATTACK, PARRY, HIT, DEATH}
@@ -14,6 +15,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var state: State = State.IDLE
 var decay: Decay = Decay.NONE
 var flipped: bool = false
+var parrying: bool = false
 var shield = 0
 
 #region Player Properties
@@ -63,6 +65,11 @@ func Movement() -> void:
 		flip_player(direction)
 	elif state != State.HIT and state != State.DEATH:
 		update_state(State.IDLE, decay)
+	if parrying:
+		direction = 1
+		if flipped:
+			direction = -1
+		velocity.x = direction * PARRY_VELOCITY
 	velocity.x = move_toward(velocity.x, 0, speed/7)
 	
 	move_and_slide()
@@ -72,6 +79,7 @@ func Attack() -> void:
 	update_state(State.ATTACK, decay)
 
 func Parry() -> void:
+	Hitbox.name = str(int(damage / 2))
 	update_state(State.PARRY, decay)
 
 func Death() -> void:
@@ -172,11 +180,34 @@ func _anim_attack_time(time: float) -> void:
 		HitboxCollision.shape.radius = 9
 		HitboxCollision.shape.height = 108
 
+func _anim_parry_time(time: float) -> void:
+	if time == 0.0:
+		HitboxCollision.disabled = true
+		HitboxCollision.position = Vector2(2, 14)
+		HitboxCollision.shape.radius = 7
+		HitboxCollision.shape.height = 66
+		HurtboxCollision.disabled = false
+	elif time == 0.5:
+		HurtboxCollision.disabled = true
+		HitboxCollision.disabled = false
+		HitboxCollision.position = Vector2(42, 6)
+		HitboxCollision.shape.radius = 34
+		HitboxCollision.shape.height = 68
+		parrying = true
+	elif time == 1.0:
+		HitboxCollision.disabled = true
+		HitboxCollision.position = Vector2(2, 14)
+		HitboxCollision.shape.radius = 7
+		HitboxCollision.shape.height = 66
+		HurtboxCollision.disabled = false
+		parrying = false
+
 func _anim_end() -> void:
 	HitboxCollision.position = Vector2(2, 14)
 	HitboxCollision.shape.radius = 7
 	HitboxCollision.shape.height = 66
 	HitboxCollision.disabled = true
+	HurtboxCollision.disabled = false
 	
 	if death:
 		Death()

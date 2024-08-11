@@ -55,8 +55,8 @@ func decay(delta: float):
 func UpdateHealth( percentage : float):
 	UI.update_health(percentage)
 
-func scatter_coins_from(position: Vector2):
-	for _i in range(6):
+func scatter_coins_from(position: Vector2, coin_amount: int):
+	for _i in range(coin_amount):
 		var coin = Coin_Instance.instantiate()
 		coin.position = position
 		coin.set_velocity(Vector2(COIN_VELOCITY * randf_range(-1.0, 1.0), -COIN_VELOCITY * randf_range(0.0, 1.0) - 150.0))

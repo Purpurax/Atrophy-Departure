@@ -86,7 +86,7 @@ func update_state(new_state: State, new_decay: Decay) -> void:
 			AnimPlayer.stop()
 			AnimPlayer.play(animation_prefix + "Walk")
 		State.ATTACK:
-			#AnimPlayer.stop()
+			AnimPlayer.stop()
 			AnimPlayer.play(animation_prefix + "Attack")
 		State.PARRY:
 			AnimPlayer.stop()
@@ -110,13 +110,46 @@ func flip_player(direction: int) -> void:
 	if !flipped && direction == -1 or flipped && direction == 1:
 		flipped = !flipped
 		Sprite.flip_h = flipped
+		Hitbox.scale = Vector2(float(direction), 1.0)
 
 
 func take_damage(amount: float, decay_percentage: float):
 	print("Player says UFF")
 	update_state(State.HIT, decay)
 
+func _anim_attack_time(time: float) -> void:
+	if time == 0.0:
+		HitboxCollision.disabled = true
+		HitboxCollision.position = Vector2(2, 14)
+		HitboxCollision.shape.radius = 7
+		HitboxCollision.shape.height = 66
+	elif time == 0.1:
+		HitboxCollision.disabled = true
+		HitboxCollision.position = Vector2(-7, 17)
+		HitboxCollision.shape.radius = 7
+		HitboxCollision.shape.height = 66
+	elif time == 0.2:
+		HitboxCollision.disabled = true
+		HitboxCollision.position = Vector2(-10, 20)
+		HitboxCollision.shape.radius = 7
+		HitboxCollision.shape.height = 66
+	elif time == 0.4:
+		HitboxCollision.position = Vector2(46, 10)
+		HitboxCollision.shape.radius = 13
+		HitboxCollision.shape.height = 166
+		HitboxCollision.disabled = false
+	elif time == 0.7:
+		HitboxCollision.position = Vector2(32, 12)
+		HitboxCollision.shape.radius = 9
+		HitboxCollision.shape.height = 108
+		HitboxCollision.disabled = false
+
 func _anim_end() -> void:
+	HitboxCollision.position = Vector2(2, 14)
+	HitboxCollision.shape.radius = 7
+	HitboxCollision.shape.height = 66
+	HitboxCollision.disabled = true
+	
 	state = State.MOVE
 	update_state(State.IDLE, decay)
 

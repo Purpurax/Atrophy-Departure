@@ -3,21 +3,24 @@ extends CharacterBody2D
 
 const SPEED = 100.0
 const JUMP_VELOCITY = -800.0
+const HIT_VELOCITY = 1000.0
 const FAST_FALL_FACTOR = 4
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-enum State {IDLE, MOVE, ATTACK, HIT}
+enum State {IDLE, MOVE, ATTACK, HIT, DEATH}
 var state: State = State.IDLE
 var flipped: bool = false
 var on_player: bool = false
 var time_elapsed: float = 0.0
 var time_elapsed_hit: float = 0.0
+var health: int = 0
 
 #region Properties
 var stationary: bool
 var trigger_distance: int
 var attack_speed: float
 var base_damage: float
+var max_health: int
 #endregion
 
 enum EntityType {MUSHROOM}
@@ -29,6 +32,7 @@ enum EntityType {MUSHROOM}
 func _ready() -> void:
 	update_state(State.IDLE)
 	update_properties()
+	health = max_health
 
 func update_properties():
 	match entity_type:
@@ -37,6 +41,7 @@ func update_properties():
 			trigger_distance = 500
 			attack_speed = 5.0
 			base_damage = 10.0
+			max_health = 40
 
 func _physics_process(delta: float):
 	if not is_on_floor():
@@ -70,7 +75,7 @@ func Movement(player_position: Vector2, horizontal_difference: int) -> void:
 		elif horizontal_difference > 0:
 			direction = 1
 		
-		if state != State.ATTACK and state != State.HIT:
+		if state != State.ATTACK and state != State.HIT and state != State.DEATH:
 			velocity.x = direction * SPEED
 			update_state(State.MOVE)
 			flip_player(-direction)
@@ -85,7 +90,18 @@ func Attack() -> void:
 	update_state(State.ATTACK)
 
 func Hit() -> void:
+	var player_position: Vector2 = World.get_player_position()
+	var horizontal_difference: int = player_position.x - self.get_transform().get_origin().x
+	
+	if horizontal_difference < 0:
+		velocity.x += HIT_VELOCITY
+	else:
+		velocity.x -= HIT_VELOCITY
+	
 	update_state(State.HIT)
+
+func Death() -> void:
+	update_state(State.DEATH)
 
 func update_state(new_state: State) -> void:
 	if state == new_state:
@@ -120,6 +136,17 @@ func _anim_parry_end() -> void:
 	state = State.MOVE
 	update_state(State.IDLE)
 
+func _anim_hit_end() -> void:
+	state = State.MOVE
+	update_state(State.IDLE)
+
+func _anim_death_start() -> void:
+	# drop stuff
+	pass
+
+func _anim_death_end() -> void:
+	queue_free()
+
 
 func _on_hitbox_area_entered(area):
 	on_player = true
@@ -133,4 +160,9 @@ func _on_hitbox_area_exited(area):
 
 
 func _on_hurtbox_area_entered(area):
-	print(area.name)
+	var damage_taken: int = int(str(area.name))
+	health -= damage_taken
+	if health <= 0:
+		Death()
+	else:
+		Hit()

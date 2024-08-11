@@ -23,7 +23,7 @@ var decay_slow = false
 @export var Camera: Camera2D
 @export var AudioPlayer: Node2D
 
-@onready var Coin_Instance = preload("res://Scene/coin_physics.tscn")
+@onready var Coin_Instance = preload("res://Scene/PhysikCoin.tscn")
 @onready var Damage_Number_Instance = preload("res://Scene/damage_number.tscn")
 
 func _ready():

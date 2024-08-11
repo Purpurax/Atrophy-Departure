@@ -1,13 +1,13 @@
 [gd_scene load_steps=22 format=3 uid="uid://cj8tmuccntbdb"]
 
 [ext_resource type="FontFile" uid="uid://xjtbjnql0tf7" path="res://Fonts/Pixelart_Serif_Font_v02_by_ReffPixels/PixelSerif_16px_v02.ttf" id="1_4b6fg"]
-[ext_resource type="Script" path="res://Script/ui.gd" id="1_ph05n"]
+[ext_resource type="Script" path="res://Script/UI.gd" id="1_ph05n"]
 [ext_resource type="Texture2D" uid="uid://c0uw7k1vsyi0o" path="res://Sprite/Loot/GameItemsAnims-Sheet.png" id="3_ryuv5"]
 [ext_resource type="Texture2D" uid="uid://bux6f7dbeqill" path="res://Sprite/UI/DecayUnder.png" id="4_oguvn"]
 [ext_resource type="Texture2D" uid="uid://djsfjc4unaqcg" path="res://Sprite/UI/DecayProgress.png" id="5_xviy7"]
 [ext_resource type="Texture2D" uid="uid://bb6rq1osinf5a" path="res://Sprite/UI/PlayerHealthUpper.png" id="6_yu3pt"]
 [ext_resource type="Texture2D" uid="uid://bmasg476lwxjo" path="res://Sprite/UI/PlayerHealthProgress.png" id="7_7si35"]
-[ext_resource type="PackedScene" uid="uid://uhvlgddboqe8" path="res://Scene/item.tscn" id="8_m6s3p"]
+[ext_resource type="PackedScene" uid="uid://uhvlgddboqe8" path="res://Scene/Item_UI.tscn" id="8_m6s3p"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n06mf"]
 atlas = ExtResource("3_ryuv5")

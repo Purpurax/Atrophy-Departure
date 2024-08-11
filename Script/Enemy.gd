@@ -162,8 +162,9 @@ func _on_hitbox_area_exited(area):
 
 
 func _on_hurtbox_area_entered(area):
-	var damage_taken: int = int(str(area.name))
-	health -= damage_taken
-	if health <= 0:
-		death = true
-	Hit()
+	if !death:
+		var damage_taken: int = int(str(area.name))
+		health -= damage_taken
+		if health <= 0:
+			death = true
+		Hit()

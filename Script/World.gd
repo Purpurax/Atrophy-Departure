@@ -51,5 +51,11 @@ func damage_player(amount: float):
 	decay(amount)
 	Player.take_damage(amount, decay_current / decay_max)
 	
-func Entered():
-	Player.death_box_hit()
+func delete_entity(entity: Node2D):
+	if entity.name == "Player":
+		# switch to other scene or display a restart button
+		# or even just reload the level
+		print("GAME OVER")
+		queue_free()
+	entity.call_deferred("queue_free")
+

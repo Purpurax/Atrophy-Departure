@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 const SPEED = 100.0
 const JUMP_VELOCITY = -800.0
-const HIT_VELOCITY = 1000.0
+const HIT_VELOCITY = 1200.0
 const FAST_FALL_FACTOR = 4
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -29,6 +29,8 @@ enum EntityType {MUSHROOM}
 @export var World: Node2D
 @export var AnimPlayer: AnimationPlayer
 @export var Sprite: Sprite2D
+@export var Hitbox: Area2D
+@export var Hurtbox: Area2D
 
 func _ready() -> void:
 	update_state(State.IDLE)
@@ -41,7 +43,7 @@ func update_properties():
 			stationary = false
 			trigger_distance = 500
 			attack_speed = 5.0
-			base_damage = 10.0
+			base_damage = 40.0
 			max_health = 40
 
 func _physics_process(delta: float):
@@ -54,7 +56,10 @@ func _process(delta: float):
 	
 	if on_player and time_elapsed_hit >= 1.5:
 		time_elapsed_hit = 0.0
-		World.damage_player(base_damage)
+		var direction = -1
+		if flipped:
+			direction = 1
+		World.damage_player(base_damage, direction)
 	
 	var player_position: Vector2 = World.get_player_position()
 	var horizontal_difference: int = player_position.x - self.get_transform().get_origin().x
@@ -131,6 +136,8 @@ func flip_player(direction: int) -> void:
 	if !flipped && direction == -1 or flipped && direction == 1:
 		flipped = !flipped
 		Sprite.flip_h = flipped
+		Hitbox.scale = Vector2(float(direction), 1.0)
+		Hurtbox.scale = Vector2(float(direction), 1.0)
 
 func _anim_attack_end() -> void:
 	state = State.MOVE
@@ -151,14 +158,19 @@ func _anim_death_end() -> void:
 
 
 func _on_hitbox_area_entered(area):
-	on_player = true
-	if time_elapsed_hit >= 1.5:
-		time_elapsed_hit = 0.0
-		World.damage_player(base_damage)
+	if area.name == "Player Hurtbox":
+		on_player = true
+		if time_elapsed_hit >= 1.5:
+			time_elapsed_hit = 0.0
+			var direction: int = -1
+			if flipped:
+				direction = 1
+			World.damage_player(base_damage, direction)
 
 
 func _on_hitbox_area_exited(area):
-	on_player = false
+	if area.name == "Player Hurtbox":
+		on_player = false
 
 
 func _on_hurtbox_area_entered(area):
@@ -167,4 +179,6 @@ func _on_hurtbox_area_entered(area):
 		health -= damage_taken
 		if health <= 0:
 			death = true
+			Hitbox.queue_free()
+			Hurtbox.queue_free()
 		Hit()

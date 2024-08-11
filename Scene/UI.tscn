@@ -100,10 +100,11 @@ animations = [{
 "speed": 8.0
 }]
 
-[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("coins_label", "DecayProgressBar")]
+[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("coins_label", "DecayProgressBar", "HealthBar")]
 script = ExtResource("1_ph05n")
 coins_label = NodePath("Panel/CoinsLabel")
 DecayProgressBar = NodePath("DecayMeter")
+HealthBar = NodePath("HealthBar")
 
 [node name="Panel" type="AspectRatioContainer" parent="."]
 anchors_preset = 3
@@ -150,12 +151,11 @@ scale = Vector2(4, 4)
 texture_over = ExtResource("4_oguvn")
 texture_progress = ExtResource("5_xviy7")
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+[node name="HealthBar" type="TextureProgressBar" parent="."]
 offset_left = 4.0
 offset_top = 4.0
 offset_right = 105.0
 offset_bottom = 46.0
 scale = Vector2(3, 3)
-value = 98.0
 texture_over = ExtResource("6_yu3pt")
 texture_progress = ExtResource("7_7si35")

@@ -3,9 +3,11 @@ extends CharacterBody2D
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -800.0
+const HIT_VELOCITY = 1200.0
+const HIT_VELOCITY_VERTICAL = -500.0
 const FAST_FALL_FACTOR = 4
 
-enum State {IDLE, MOVE, ATTACK, PARRY, HIT}
+enum State {IDLE, MOVE, ATTACK, PARRY, HIT, DEATH}
 enum Decay {NONE, PARTIAL, RUST}
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -13,43 +15,51 @@ var state: State = State.IDLE
 var decay: Decay = Decay.NONE
 var flipped: bool = false
 
+#region Player Properties
+var death: bool = false
+var max_health: float = 100
+var health: float = 0
+#endregion
+
 
 
 @export var AnimPlayer: AnimationPlayer
 @export var Sprite: Sprite2D
 @export var Hitbox: Area2D
 @export var HitboxCollision: CollisionShape2D
+@export var HurtboxCollision: CollisionShape2D
 
 func _ready() -> void:
+	health = max_health
 	update_state(state, decay)
 
 
 func _physics_process(delta):
 	if not is_on_floor():
-		if Input.is_action_pressed("Down"):
+		if Input.is_action_pressed("Down") and state != State.HIT and state != State.DEATH:
 			velocity.y += gravity * delta * FAST_FALL_FACTOR
 		else:
 			velocity.y += gravity * delta
 
 func _process(delta):
 	Movement()
-	if is_on_floor() and Input.is_action_just_pressed("Attack"):
+	if is_on_floor() and Input.is_action_just_pressed("Attack") and !death:
 		Attack()
-	if is_on_floor() and Input.is_action_just_pressed("Parry"):
+	if is_on_floor() and Input.is_action_just_pressed("Parry") and !death:
 		Parry()
 		
 func Movement() -> void:
-	if Input.is_action_just_pressed("Jump") and is_on_floor() and state != State.ATTACK and state != State.PARRY:
+	if Input.is_action_just_pressed("Jump") and is_on_floor() and state != State.ATTACK and state != State.PARRY and state != State.HIT and state != State.DEATH:
 		velocity.y = JUMP_VELOCITY
 	
 	var direction: int = Input.get_axis("Left", "Right")
-	if direction and state != State.ATTACK and state != State.PARRY:
+	if direction and state != State.ATTACK and state != State.PARRY and state != State.HIT and state != State.DEATH:
 		velocity.x = direction * SPEED
 		update_state(State.MOVE, decay)
 		flip_player(direction)
-	else:
+	elif state != State.HIT and state != State.DEATH:
 		update_state(State.IDLE, decay)
-		velocity.x = move_toward(velocity.x, 0, SPEED/7)
+	velocity.x = move_toward(velocity.x, 0, SPEED/7)
 	
 	move_and_slide()
 
@@ -61,10 +71,14 @@ func Attack() -> void:
 func Parry() -> void:
 	update_state(State.PARRY, decay)
 
+func Death() -> void:
+	HurtboxCollision.disabled = true
+	update_state(State.DEATH, decay)
+
 func update_state(new_state: State, new_decay: Decay) -> void:
 	if state == new_state and new_decay == decay:
 		return
-	if state == State.ATTACK or state == State.PARRY: # attacks cannot be canceled
+	if (state == State.ATTACK or state == State.PARRY) and new_state != State.HIT and new_state != State.DEATH: # attacks cannot be canceled
 		return
 	state = new_state
 	decay = new_decay
@@ -94,6 +108,9 @@ func update_state(new_state: State, new_decay: Decay) -> void:
 		State.HIT:
 			AnimPlayer.stop()
 			AnimPlayer.play(animation_prefix + "Hurt")
+		State.DEATH:
+			AnimPlayer.stop()
+			AnimPlayer.play(animation_prefix + "Death")
 
 func update_decay(decay_percent: float):
 	var new_decay: Decay
@@ -113,9 +130,20 @@ func flip_player(direction: int) -> void:
 		Hitbox.scale = Vector2(float(direction), 1.0)
 
 
-func take_damage(amount: float, decay_percentage: float):
-	print("Player says UFF")
+func take_damage(amount: float, decay_percentage: float, direction: int) -> float:
+	if direction == 1:
+		velocity.x = HIT_VELOCITY
+	elif direction == -1:
+		velocity.x = -HIT_VELOCITY
+	flip_player(-direction)
+	velocity.y = HIT_VELOCITY_VERTICAL
+	
+	health -= int(amount)
+	death = health <= 0
+	
 	update_state(State.HIT, decay)
+	
+	return health / max_health
 
 func _anim_attack_time(time: float) -> void:
 	if time == 0.0:
@@ -124,15 +152,9 @@ func _anim_attack_time(time: float) -> void:
 		HitboxCollision.shape.radius = 7
 		HitboxCollision.shape.height = 66
 	elif time == 0.1:
-		HitboxCollision.disabled = true
 		HitboxCollision.position = Vector2(-7, 17)
-		HitboxCollision.shape.radius = 7
-		HitboxCollision.shape.height = 66
 	elif time == 0.2:
-		HitboxCollision.disabled = true
 		HitboxCollision.position = Vector2(-10, 20)
-		HitboxCollision.shape.radius = 7
-		HitboxCollision.shape.height = 66
 	elif time == 0.4:
 		HitboxCollision.position = Vector2(46, 10)
 		HitboxCollision.shape.radius = 13
@@ -142,7 +164,6 @@ func _anim_attack_time(time: float) -> void:
 		HitboxCollision.position = Vector2(32, 12)
 		HitboxCollision.shape.radius = 9
 		HitboxCollision.shape.height = 108
-		HitboxCollision.disabled = false
 
 func _anim_end() -> void:
 	HitboxCollision.position = Vector2(2, 14)
@@ -150,8 +171,11 @@ func _anim_end() -> void:
 	HitboxCollision.shape.height = 66
 	HitboxCollision.disabled = true
 	
-	state = State.MOVE
-	update_state(State.IDLE, decay)
+	if death:
+		Death()
+	else:
+		state = State.MOVE
+		update_state(State.IDLE, decay)
 
 
 func _on_hitbox_area_entered(area):

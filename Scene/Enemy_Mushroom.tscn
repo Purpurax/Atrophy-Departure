@@ -456,13 +456,15 @@ _data = {
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jvhhq"]
 radius = 14.5
 
-[node name="EnemyMushroom" type="CharacterBody2D" node_paths=PackedStringArray("AnimPlayer", "Sprite")]
+[node name="EnemyMushroom" type="CharacterBody2D" node_paths=PackedStringArray("AnimPlayer", "Sprite", "Hitbox", "Hurtbox")]
 scale = Vector2(2, 2)
 collision_layer = 6
 collision_mask = 5
 script = ExtResource("1_vfx6n")
 AnimPlayer = NodePath("AnimationPlayer")
 Sprite = NodePath("Sprite2D")
+Hitbox = NodePath("Hitbox")
+Hurtbox = NodePath("Hurtbox")
 
 [node name="WorldCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_3u70x")

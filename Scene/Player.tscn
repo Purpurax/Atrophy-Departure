@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://d4fbacmn1pvjj"]
+[gd_scene load_steps=43 format=3 uid="uid://dsesq20h0pl82"]
 
 [ext_resource type="Script" path="res://Script/Player.gd" id="1_fg0r2"]
 [ext_resource type="Texture2D" uid="uid://q51gdylbfhp2" path="res://Sprite/Main_Character/FREE-Knight 2D Pixel Art/Sprite_with_outline/ATTACK.png" id="1_lo85t"]
@@ -14,6 +14,11 @@
 [ext_resource type="Texture2D" uid="uid://dkselcgjorhbt" path="res://Sprite/Main_Character/Fully Rusted/PARRY.png" id="12_1ncxy"]
 [ext_resource type="Texture2D" uid="uid://ch3yjkgqqx8iy" path="res://Sprite/Main_Character/Fully Rusted/WALK.png" id="13_efxyo"]
 [ext_resource type="Texture2D" uid="uid://davrjki0l46ja" path="res://Sprite/Main_Character/FREE-Knight 2D Pixel Art/Sprite_with_outline/HURT.png" id="14_yr2fd"]
+[ext_resource type="Texture2D" uid="uid://depcch8f4ts7j" path="res://Sprite/Main_Character/FREE-Knight 2D Pixel Art/Sprite_with_outline/DEATH.png" id="15_t3x4g"]
+[ext_resource type="Texture2D" uid="uid://dkafxyy1d0qbo" path="res://Sprite/Main_Character/Slightly_Rusted/HURT.png" id="16_qhm43"]
+[ext_resource type="Texture2D" uid="uid://cnxv4lauyl6nl" path="res://Sprite/Main_Character/Fully Rusted/HURT.png" id="17_qgu35"]
+[ext_resource type="Texture2D" uid="uid://bebnl7owq77ug" path="res://Sprite/Main_Character/Fully Rusted/DEATH.png" id="18_ul2ye"]
+[ext_resource type="Texture2D" uid="uid://b7j8t7r4767pa" path="res://Sprite/Main_Character/Slightly_Rusted/DEATH.png" id="19_o4cl4"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3v04e"]
 radius = 20.0
@@ -80,7 +85,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.4, 0.7, 0.9),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "values": [{
-"args": [0.7],
+"args": [0.0],
 "method": &"_anim_attack_time"
 }, {
 "args": [0.1],
@@ -92,7 +97,7 @@ tracks/4/keys = {
 "args": [0.4],
 "method": &"_anim_attack_time"
 }, {
-"args": [0.0],
+"args": [0.7],
 "method": &"_anim_attack_time"
 }, {
 "args": [],
@@ -102,7 +107,7 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_lgnh8"]
 resource_name = "Hurt"
-length = 0.9
+length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -146,7 +151,7 @@ tracks/3/path = NodePath("Sprite2D:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.6),
+"times": PackedFloat32Array(0, 0.1, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [0, 1, 2]
@@ -158,7 +163,7 @@ tracks/4/path = NodePath(".")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.9),
+"times": PackedFloat32Array(0.4),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -348,16 +353,16 @@ tracks/4/keys = {
 "args": [0.0],
 "method": &"_anim_attack_time"
 }, {
+"args": [0.1],
+"method": &"_anim_attack_time"
+}, {
+"args": [0.2],
+"method": &"_anim_attack_time"
+}, {
+"args": [0.4],
+"method": &"_anim_attack_time"
+}, {
 "args": [0.7],
-"method": &"_anim_attack_time"
-}, {
-"args": [0.0],
-"method": &"_anim_attack_time"
-}, {
-"args": [0.0],
-"method": &"_anim_attack_time"
-}, {
-"args": [0.0],
 "method": &"_anim_attack_time"
 }, {
 "args": [],
@@ -668,10 +673,10 @@ tracks/4/keys = {
 "args": [0.2],
 "method": &"_anim_attack_time"
 }, {
-"args": [0.7],
+"args": [0.4],
 "method": &"_anim_attack_time"
 }, {
-"args": [0.0],
+"args": [0.7],
 "method": &"_anim_attack_time"
 }, {
 "args": [],
@@ -902,18 +907,353 @@ tracks/3/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
 
+[sub_resource type="Animation" id="Animation_laapp"]
+resource_name = "Death"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("15_t3x4g")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [9]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.9),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_anim_end"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_qjmi3"]
+resource_name = "Partial Rust Hurt"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("16_qhm43")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_anim_end"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_b44av"]
+resource_name = "Rust Hurt"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("17_qgu35")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_anim_end"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_02dr5"]
+resource_name = "Rust Death"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("18_ul2ye")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [9]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.9),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_anim_end"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_cd1nl"]
+resource_name = "Partial Rust Death"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("19_o4cl4")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [9]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.9),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_anim_end"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ty4sp"]
 _data = {
 "Attack": SubResource("Animation_1dj0n"),
+"Death": SubResource("Animation_laapp"),
 "Hurt": SubResource("Animation_lgnh8"),
 "Idle": SubResource("Animation_8ud3v"),
 "Parry": SubResource("Animation_nskad"),
 "Partial Rust Attack": SubResource("Animation_lr3nd"),
+"Partial Rust Death": SubResource("Animation_cd1nl"),
+"Partial Rust Hurt": SubResource("Animation_qjmi3"),
 "Partial Rust Idle": SubResource("Animation_2x51l"),
 "Partial Rust Parry": SubResource("Animation_6tm0q"),
 "Partial Rust Walk": SubResource("Animation_l62ka"),
 "RESET": SubResource("Animation_krp5w"),
 "Rust Attack": SubResource("Animation_xku33"),
+"Rust Death": SubResource("Animation_02dr5"),
+"Rust Hurt": SubResource("Animation_b44av"),
 "Rust Idle": SubResource("Animation_em737"),
 "Rust Parry": SubResource("Animation_8y574"),
 "Rust Walk": SubResource("Animation_7kglh"),
@@ -927,7 +1267,7 @@ size = Vector2(51, 96)
 radius = 7.0
 height = 66.0
 
-[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("AnimPlayer", "Sprite", "Hitbox", "HitboxCollision")]
+[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("AnimPlayer", "Sprite", "Hitbox", "HitboxCollision", "HurtboxCollision")]
 collision_layer = 2
 collision_mask = 9
 script = ExtResource("1_fg0r2")
@@ -935,6 +1275,7 @@ AnimPlayer = NodePath("AnimationPlayer")
 Sprite = NodePath("Sprite2D")
 Hitbox = NodePath("Hitbox")
 HitboxCollision = NodePath("Hitbox/HitboxCollision")
+HurtboxCollision = NodePath("Player Hurtbox/HurtboxCollision")
 
 [node name="PhysicalCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_3v04e")
@@ -951,11 +1292,11 @@ libraries = {
 }
 autoplay = "Idle"
 
-[node name="Hurtbox" type="Area2D" parent="."]
+[node name="Player Hurtbox" type="Area2D" parent="."]
 collision_layer = 16
 collision_mask = 0
 
-[node name="HurtboxCollision" type="CollisionShape2D" parent="Hurtbox"]
+[node name="HurtboxCollision" type="CollisionShape2D" parent="Player Hurtbox"]
 position = Vector2(-1.5, 1)
 shape = SubResource("RectangleShape2D_w8hwx")
 

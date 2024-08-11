@@ -47,9 +47,10 @@ func coins_decrease_by(n: int):
 func get_player_position() -> Vector2:
 	return Player.get_transform().get_origin()
 
-func damage_player(amount: float):
+func damage_player(amount: float, direction: int):
 	decay(amount)
-	Player.take_damage(amount, decay_current / decay_max)
+	var health_percentage: float = Player.take_damage(amount, decay_current / decay_max, direction)
+	UI.update_health(health_percentage)
 	
 func delete_entity(entity: Node2D):
 	if entity.name == "Player":

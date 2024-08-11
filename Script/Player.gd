@@ -16,6 +16,7 @@ var state: State = State.IDLE
 var decay: Decay = Decay.NONE
 var flipped: bool = false
 var parrying: bool = false
+var rust_attack: bool = false
 var shield = 0
 
 #region Player Properties
@@ -23,6 +24,8 @@ var death: bool = false
 var max_health: float = 100
 var health: float = 0
 var damage: float = 19.0
+var dashdamage = 0
+var healamp = 1
 #endregion
 
 
@@ -38,7 +41,6 @@ func _ready() -> void:
 	health = max_health
 	update_state(state, decay)
 
-
 func _physics_process(delta):
 	if not is_on_floor():
 		if Input.is_action_pressed("Down") and state != State.HIT and state != State.DEATH:
@@ -50,6 +52,7 @@ func _process(delta):
 	Movement()
 	if is_on_floor() and Input.is_action_just_pressed("Attack") and !death:
 		Attack()
+		print(healamp)
 	if is_on_floor() and Input.is_action_just_pressed("Parry") and !death:
 		Parry()
 		
@@ -75,11 +78,16 @@ func Movement() -> void:
 	move_and_slide()
 
 func Attack() -> void:
-	Hitbox.name = str(int(damage))
+	if rust_attack:
+		var decay_current: float = World.get_decay_current()
+		Hitbox.name = str(int(damage + decay_current / 8))
+	else:
+		Hitbox.name = str(int(damage))
+	
 	update_state(State.ATTACK, decay)
 
 func Parry() -> void:
-	Hitbox.name = str(int(damage / 2))
+	Hitbox.name = str(int(damage / 2 + dashdamage))
 	update_state(State.PARRY, decay)
 
 func Death() -> void:
@@ -233,9 +241,17 @@ func increase_speed(amount: float):
 	speed += amount
 
 func heal(amount: float):
-	health += amount
+	health += amount + healamp
 	World.UpdateHealth(health / max_health)
 
 func activate_shield(amount: float):
 	shield = amount
 	
+func activate_DashDamage(amount: float):
+	dashdamage += amount
+
+func activate_HealAmp(amount: float):
+	healamp *= amount
+
+func activate_rust_attack(decay_current: float):
+	rust_attack = true

@@ -127,6 +127,9 @@ func generate_item_frame() -> int:
 		191, # Item slows decay
 		65, # Items Heals player with coins
 		49, # Item decreases damage taken
+		109,
+		60,
+		17,
 	]
 	var possible_frames: Array[int] = []
 	for frame in all_frames:
@@ -136,7 +139,7 @@ func generate_item_frame() -> int:
 	if len(possible_frames) == 0:
 		return -1
 	
-	return possible_frames.pick_random()
+	return 17 #possible_frames.pick_random()
 
 func equip_item(frame: int) -> bool:
 	var successful = UI.equip_item(frame)
@@ -163,3 +166,12 @@ func update_player_stats(frame: int):
 			coin_vamp = true
 		49:
 			Player.activate_shield(10.0)
+		109:
+			Player.activate_DashDamage(5.0)
+		60:
+			Player.activate_HealAmp(2.0)
+		17:
+			Player.activate_rust_attack(decay_current)
+
+func get_decay_current() -> float:
+	return decay_current

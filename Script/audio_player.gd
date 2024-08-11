@@ -5,6 +5,8 @@ extends Node2D
 @export var SwordHit: AudioStreamPlayer2D
 @export var SwordHit2: AudioStreamPlayer2D
 @export var ChestOpen: AudioStreamPlayer2D
+@export var PlayerHurt: AudioStreamPlayer2D
+@export var PlayerDeath: AudioStreamPlayer2D
 
 func play_audio(name: String):
 	match name:
@@ -20,5 +22,9 @@ func play_audio(name: String):
 				SwordHit2.play()
 		"Chest Open":
 			ChestOpen.play()
+		"Player Hurt":
+			PlayerHurt.play()
+		"Player Death":
+			PlayerDeath.play()
 		_:
 			print("tried to play audio withs: " + name)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bqegxofiknybn"]
+[gd_scene load_steps=8 format=3 uid="uid://bqegxofiknybn"]
 
 [ext_resource type="Script" path="res://Script/audio_player.gd" id="1_omenr"]
 [ext_resource type="AudioStream" uid="uid://b2jrxmnpex554" path="res://Sounds/Coin.wav" id="2_i8t40"]
@@ -6,14 +6,16 @@
 [ext_resource type="AudioStream" uid="uid://botmyiy5n3sa7" path="res://Sounds/273566__n_audioman__jump15.wav" id="3_gs6l2"]
 [ext_resource type="AudioStream" uid="uid://b4wiv4ayxmw2k" path="res://Sounds/641902__colorscrimsontears__slash-rpg-1.wav" id="5_jdgup"]
 [ext_resource type="AudioStream" uid="uid://ca5slscevoo53" path="res://Sounds/662458__fullstacksound__treasure_chest.wav" id="6_u7hay"]
+[ext_resource type="AudioStream" uid="uid://ct2b2f2q4vuyg" path="res://Sounds/629664__stumpbutt__retro-taking-damage-sfx2.wav" id="7_ny2ak"]
 
-[node name="AudioPlayer" type="Node2D" node_paths=PackedStringArray("Coin", "Jump", "SwordHit", "SwordHit2", "ChestOpen")]
+[node name="AudioPlayer" type="Node2D" node_paths=PackedStringArray("Coin", "Jump", "SwordHit", "SwordHit2", "ChestOpen", "PlayerHurt")]
 script = ExtResource("1_omenr")
 Coin = NodePath("Coin Collect")
 Jump = NodePath("Jump")
 SwordHit = NodePath("Sword Hit")
 SwordHit2 = NodePath("Sword Hit2")
 ChestOpen = NodePath("Chest Open")
+PlayerHurt = NodePath("Player Hurt")
 
 [node name="Coin Collect" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_i8t40")
@@ -30,3 +32,8 @@ stream = ExtResource("5_jdgup")
 
 [node name="Chest Open" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_u7hay")
+
+[node name="Player Hurt" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_ny2ak")
+
+[node name="Player Death" type="AudioStreamPlayer2D" parent="."]

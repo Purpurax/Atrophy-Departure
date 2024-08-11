@@ -24,7 +24,6 @@ var attack_speed: float
 var base_damage: float
 var max_health: int
 var pause_time_after_hit: float
-var coin_drop_amount: int
 #endregion
 
 enum EntityType {MUSHROOM, LURP}
@@ -50,7 +49,6 @@ func update_properties():
 			base_damage = 3.0
 			max_health = 40
 			pause_time_after_hit = 0.4
-			coin_drop_amount = 3
 		EntityType.LURP:
 			stationary = false
 			trigger_distance = 500
@@ -58,7 +56,6 @@ func update_properties():
 			base_damage = 2.0
 			max_health = 20
 			pause_time_after_hit = 0.4
-			coin_drop_amount = 2
 
 func _physics_process(delta: float):
 	if not is_on_floor():
@@ -122,7 +119,7 @@ func Hit() -> void:
 	update_state(State.HIT)
 
 func Death() -> void:
-	World.scatter_coins_from(self.position, coin_drop_amount)
+	World.scatter_coins_from(self.position)
 	update_state(State.DEATH)
 
 func update_state(new_state: State) -> void:

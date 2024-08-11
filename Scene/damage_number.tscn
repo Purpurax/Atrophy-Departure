@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://7svxk0vyonj2"]
+[gd_scene load_steps=5 format=3 uid="uid://dhrsg87l0k4h5"]
 
 [ext_resource type="Script" path="res://Script/damage_number.gd" id="1_6rb4k"]
 [ext_resource type="FontFile" uid="uid://b6q5voprl0p40" path="res://Fonts/Pixelart_Serif_Font_v02_by_ReffPixels/PixelSerif_16px_v02.otf" id="1_efhka"]
@@ -10,6 +10,9 @@ size = Vector2(26, 14)
 default_font = ExtResource("1_efhka")
 
 [node name="Damage_Number" type="RigidBody2D"]
+collision_layer = 0
+collision_mask = 0
+gravity_scale = -0.1
 script = ExtResource("1_6rb4k")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

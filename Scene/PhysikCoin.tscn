@@ -1,8 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://mt188jrqo1nk"]
+[gd_scene load_steps=18 format=3 uid="uid://mt188jrqo1nk"]
 
 [ext_resource type="Script" path="res://Scene/PhysikCoin.gd" id="1_5g6xi"]
 [ext_resource type="Texture2D" uid="uid://c0uw7k1vsyi0o" path="res://Sprite/Loot/GameItemsAnims-Sheet.png" id="2_0amd0"]
-[ext_resource type="AudioStream" uid="uid://b2jrxmnpex554" path="res://Sounds/Coin.wav" id="3_64qup"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ys4i8"]
 atlas = ExtResource("2_0amd0")
@@ -96,13 +95,16 @@ animations = [{
 "speed": 8.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_xcqma"]
-radius = 8.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qxc35"]
+size = Vector2(12, 12)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hmbcj"]
+radius = 8.0
 
-[node name="Coin2" type="RigidBody2D"]
+[node name="Coin" type="RigidBody2D"]
 collision_layer = 0
+mass = 0.02
+gravity_scale = 0.33
 script = ExtResource("1_5g6xi")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -112,7 +114,7 @@ autoplay = "default"
 frame_progress = 0.12701
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_xcqma")
+shape = SubResource("RectangleShape2D_qxc35")
 
 [node name="Area2D" type="Area2D" parent="."]
 scale = Vector2(1.625, 1.625)
@@ -121,9 +123,5 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_hmbcj")
-
-[node name="PickupSFX" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_64qup")
-volume_db = -5.0
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

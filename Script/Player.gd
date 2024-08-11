@@ -19,6 +19,7 @@ var flipped: bool = false
 var death: bool = false
 var max_health: float = 100
 var health: float = 0
+var damage: float = 40.0
 #endregion
 
 
@@ -66,7 +67,6 @@ func Movement() -> void:
 	move_and_slide()
 
 func Attack() -> void:
-	var damage: float = 9.5
 	Hitbox.name = str(int(damage))
 	update_state(State.ATTACK, decay)
 

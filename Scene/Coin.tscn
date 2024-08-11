@@ -98,19 +98,11 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_xcqma"]
 radius = 8.0
 
-<<<<<<< Updated upstream
-[node name="Coin" type="Area2D"]
-=======
-[node name="Coin2" type="Area2D" node_paths=PackedStringArray("Audio")]
->>>>>>> Stashed changes
+[node name="Coin2" type="Area2D"]
 scale = Vector2(2, 2)
 collision_layer = 8
 collision_mask = 2
 script = ExtResource("1_erxcl")
-<<<<<<< Updated upstream
-=======
-Audio = NodePath("")
->>>>>>> Stashed changes
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://ra1qdgtv5bup"]
+
+[ext_resource type="Script" path="res://Scene/DeathBox.gd" id="1_37gmk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o0ddu"]
+size = Vector2(157.5, 25)
+
+[node name="DeathBox" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_37gmk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(98.25, 34.5)
+shape = SubResource("RectangleShape2D_o0ddu")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

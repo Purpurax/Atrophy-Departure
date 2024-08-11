@@ -50,3 +50,6 @@ func get_player_position() -> Vector2:
 func damage_player(amount: float):
 	decay(amount)
 	Player.take_damage(amount, decay_current / decay_max)
+	
+func Entered():
+	Player.death_box_hit()

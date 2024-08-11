@@ -1,10 +1,10 @@
 [gd_scene load_steps=12 format=3 uid="uid://dw60fftogfr60"]
 
-[ext_resource type="PackedScene" uid="uid://d4fbacmn1pvjj" path="res://Scene/Player.tscn" id="1_k76df"]
+[ext_resource type="PackedScene" uid="uid://d3kw7nw7cnkvm" path="res://Scene/Player.tscn" id="1_k76df"]
 [ext_resource type="Script" path="res://Script/World.gd" id="1_o026n"]
 [ext_resource type="PackedScene" uid="uid://doc6d7rxr6law" path="res://Scene/tile_map.tscn" id="4_6f6ma"]
 [ext_resource type="PackedScene" uid="uid://d0unxj4wqs361" path="res://Scene/Coin.tscn" id="4_nuaeg"]
-[ext_resource type="PackedScene" uid="uid://7jt5na6sboyb" path="res://Scene/Enemy_Mushroom.tscn" id="6_2rsi8"]
+[ext_resource type="PackedScene" uid="uid://5ipkdxwfugik" path="res://Scene/Enemy_Mushroom.tscn" id="6_2rsi8"]
 [ext_resource type="PackedScene" uid="uid://cwy5u5v3v51ck" path="res://Scene/UI.tscn" id="6_37pc7"]
 [ext_resource type="PackedScene" uid="uid://uix2mi250lyk" path="res://Scene/chest.tscn" id="8_0g2f7"]
 [ext_resource type="PackedScene" uid="uid://dmajyvditdk1x" path="res://Scene/chest_inverted.tscn" id="9_n2pnf"]
@@ -111,6 +111,5 @@ offset_bottom = 634.0
 grow_horizontal = 1
 grow_vertical = 1
 
-[node name="DeathBox" parent="." node_paths=PackedStringArray("World") instance=ExtResource("11_n580b")]
+[node name="DeathBox" parent="." instance=ExtResource("11_n580b")]
 position = Vector2(886, 182)
-World = NodePath("..")

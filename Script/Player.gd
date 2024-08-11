@@ -156,3 +156,7 @@ func _anim_end() -> void:
 
 func _on_hitbox_area_entered(area):
 	HitboxCollision.disabled = true
+
+func death_box_hit():
+	print("hehe")
+	queue_free()
